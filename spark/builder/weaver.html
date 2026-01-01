@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="infinity-legend-roles" content="WEAVER,BRIDGE,CONNECTOR">
+<meta name="infinity-legend-symbols" content="🪡,🌉,🔗">
+<title>🪡 Weaver</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #cccccc;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.panel h2 {
+  color: #ffd700;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.queue-item {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.queue-title {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.queue-content {
+  color: #cccccc;
+  margin-bottom: 0.5rem;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.queue-meta {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.empty-queue {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.sparks-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.spark-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.spark-item:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.spark-item.selected {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+}
+
+.spark-id {
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.spark-title {
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 5px;
+  padding: 0.75rem;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.selected-connections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.connection-badge {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.connection-badge .remove {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn {
+  background: #ffd700;
+  color: #0f0c29;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  background: #ffed4e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffd700;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .sparks-list {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🪡 Weaver</h1>
+    <p class="description">
+      Thread new content into the existing fabric. Connect incoming content with existing sparks
+      to build the interconnected web. This is the <strong style="color: #ffff00;">YELLOW 🟨</strong> layer - the connection builder.
+    </p>
+  </header>
+
+  <div class="panel">
+    <h2>📋 Intake Queue</h2>
+    <div id="queueDisplay">
+      <div class="empty-queue">
+        No content in queue. Visit 📥 Intake Node to add content.
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🔗 Available Sparks</h2>
+    <p style="color: #999; margin-bottom: 1rem;">Click sparks to select connections</p>
+    <div id="sparksList" class="sparks-list">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🪡 Weave Connections</h2>
+    <div class="form-group">
+      <label>Selected Connections</label>
+      <div id="selectedConnections" class="selected-connections">
+        <span style="color: #999;">No connections selected</span>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button class="btn" id="weaveBtn" disabled>
+        🪡 Weave & Continue
+      </button>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="../index.html" class="nav-link">⚡ Spark Index</a>
+    <a href="../../index.html" class="nav-link">👑 Crown Index</a>
+    <a href="./intake.html" class="nav-link">📥 Intake Node</a>
+    <a href="./emitter.html" class="nav-link">🟡 Emitter</a>
+  </div>
+
+  <footer>
+    <p>🪡 Weaver • Thread & Connect</p>
+    <p style="margin-top: 0.5rem;">Part of the Infinity Legend System v1.0.0</p>
+  </footer>
+</div>
+
+<script>
+const STORAGE_KEY = 'infinity_legend_sparks';
+const selectedConnections = new Set();
+
+// Load spark state
+function loadState() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (e) {
+      console.error('Error parsing stored state:', e);
+    }
+  }
+  return { sparks: [], connections: [], nextId: 1 };
+}
+
+// Load intake queue
+function loadQueue() {
+  const queue = sessionStorage.getItem('intake_queue');
+  if (queue) {
+    try {
+      return JSON.parse(queue);
+    } catch (e) {
+      console.error('Error parsing queue:', e);
+    }
+  }
+  return null;
+}
+
+// Display queue
+function displayQueue() {
+  const queueDisplay = document.getElementById('queueDisplay');
+  const queueData = loadQueue();
+  
+  if (!queueData) {
+    queueDisplay.innerHTML = '<div class="empty-queue">No content in queue. Visit 📥 Intake Node to add content.</div>';
+    return;
+  }
+  
+  queueDisplay.innerHTML = `
+    <div class="queue-item">
+      <div class="queue-title">${queueData.title}</div>
+      <div class="queue-content">${queueData.content.substring(0, 200)}${queueData.content.length > 200 ? '...' : ''}</div>
+      <div class="queue-meta">
+        Roles: ${queueData.roles.join(', ') || 'None'} • 
+        Queued: ${new Date(queueData.intakeTimestamp).toLocaleString()}
+      </div>
+    </div>
+  `;
+}
+
+// Display available sparks
+function displaySparks() {
+  const sparksList = document.getElementById('sparksList');
+  const state = loadState();
+  
+  if (state.sparks.length === 0) {
+    sparksList.innerHTML = '<div class="empty-queue">No sparks available yet. Create sparks in the Spark Index.</div>';
+    return;
+  }
+  
+  sparksList.innerHTML = '';
+  
+  state.sparks.forEach(spark => {
+    const item = document.createElement('div');
+    item.className = 'spark-item';
+    item.onclick = () => toggleConnection(spark.id, item);
+    
+    item.innerHTML = `
+      <div class="spark-id">${spark.icon} ${spark.id}</div>
+      <div class="spark-title">${spark.title}</div>
+    `;
+    
+    sparksList.appendChild(item);
+  });
+}
+
+// Toggle connection selection
+function toggleConnection(sparkId, element) {
+  if (selectedConnections.has(sparkId)) {
+    selectedConnections.delete(sparkId);
+    element.classList.remove('selected');
+  } else {
+    selectedConnections.add(sparkId);
+    element.classList.add('selected');
+  }
+  
+  updateSelectedDisplay();
+}
+
+// Update selected connections display
+function updateSelectedDisplay() {
+  const container = document.getElementById('selectedConnections');
+  const weaveBtn = document.getElementById('weaveBtn');
+  
+  if (selectedConnections.size === 0) {
+    container.innerHTML = '<span style="color: #999;">No connections selected</span>';
+    weaveBtn.disabled = true;
+  } else {
+    container.innerHTML = Array.from(selectedConnections).map(id => `
+      <div class="connection-badge">
+        ${id}
+        <span class="remove" onclick="removeConnection('${id}')">✕</span>
+      </div>
+    `).join('');
+    weaveBtn.disabled = false;
+  }
+}
+
+// Remove connection
+window.removeConnection = function(sparkId) {
+  selectedConnections.delete(sparkId);
+  
+  // Update visual state
+  const items = document.querySelectorAll('.spark-item');
+  items.forEach(item => {
+    if (item.textContent.includes(sparkId)) {
+      item.classList.remove('selected');
+    }
+  });
+  
+  updateSelectedDisplay();
+};
+
+// Weave connections
+document.getElementById('weaveBtn').addEventListener('click', () => {
+  const queueData = loadQueue();
+  
+  if (!queueData) {
+    alert('❌ No content in queue to weave!');
+    return;
+  }
+  
+  // Add connections to queue data
+  queueData.connections = Array.from(selectedConnections);
+  
+  // Save back to sessionStorage
+  sessionStorage.setItem('intake_queue', JSON.stringify(queueData));
+  
+  alert(`🪡 Connections woven!\n\n${selectedConnections.size} connection(s) added.\n\nProceed to 🟡 Emitter to publish the spark.`);
+  
+  // Clear selections
+  selectedConnections.clear();
+  updateSelectedDisplay();
+});
+
+// Initialize
+displayQueue();
+displaySparks();
+updateSelectedDisplay();
+</script>
+</body>
+</html>

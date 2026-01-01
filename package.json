@@ -1,0 +1,76 @@
+{
+  "name": "legend-core",
+  "version": "1.0.0",
+  "description": "Infinity Legend System - Declarative, immutable, discoverable semantic operating system",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pewpi-infinity/legend-core.git"
+  },
+  "keywords": [
+    "infinity-legend",
+    "semantic-system",
+    "never-destroy",
+    "spark-builder",
+    "declarative",
+    "immutable",
+    "self-propagating"
+  ],
+  "author": "pewpi-infinity",
+  "license": "MIT",
+  "infinity_legend": {
+    "version": "1.0.0",
+    "tagline": "🧱 Kris 🔑 • 👑📶⚪ • 🛒📶👑",
+    "roles": [
+      "CROWN_INDEX",
+      "ORCHESTRATOR",
+      "ASSEMBLER",
+      "MEMORY_NODE",
+      "SPARK",
+      "EMITTER",
+      "WEAVER",
+      "INTAKE_NODE"
+    ],
+    "symbols": [
+      "👑",
+      "🛒",
+      "🔧",
+      "🪐",
+      "⚡",
+      "🟡",
+      "🪡",
+      "📥"
+    ],
+    "core_principles": [
+      "never_destroy",
+      "always_link",
+      "self_reference",
+      "domino_effect",
+      "discoverable",
+      "immutable_core"
+    ],
+    "formulas": {
+      "powerful_orchestrator": "🛒📶👑",
+      "robot_disk_controller": "🦾-[📀]-🕹️",
+      "robot_disk_gear": "🦾-[📀]-⚙️",
+      "crown_router_spine": "👑🔀🎛️",
+      "magnet_memory_loop": "🧲🪐🔁",
+      "spark_weaver_emitter": "⚡🪡🟡"
+    },
+    "pages": {
+      "crown_index": "/index.html",
+      "legend_schema": "/legend.json",
+      "documentation": "/LEGEND.md",
+      "spark_builder": "/spark/index.html",
+      "intake_node": "/spark/builder/intake.html",
+      "weaver": "/spark/builder/weaver.html",
+      "emitter": "/spark/builder/emitter.html"
+    },
+    "ecosystem_stats": {
+      "legend_roles": 33,
+      "core_formulas": 6,
+      "color_categories": 7,
+      "builder_stages": 3
+    }
+  }
+}

@@ -1,11 +1,430 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Infinity Legend Core</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="infinity-legend-roles" content="CROWN_INDEX,ORCHESTRATOR,ASSEMBLER,MEMORY_NODE">
+<meta name="infinity-legend-symbols" content="👑,🛒,🔧,🪐">
+<meta name="infinity-legend-version" content="1.0.0">
+<title>👑 INFINITY LEGEND CORE</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+h1 {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  animation: shimmer 3s ease-in-out infinite;
+  font-weight: bold;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: #ffd700;
+  margin: 1rem 0;
+  letter-spacing: 0.2rem;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pulse {
+  width: 10px;
+  height: 10px;
+  background: #00ff00;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.intro {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 3rem;
+  line-height: 1.8;
+}
+
+.intro h2 {
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #ffd700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formula-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.formula-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.formula-card:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+.formula-symbol {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.formula-name {
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.role-card:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.role-symbol {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.role-name {
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.role-meaning {
+  font-size: 0.85rem;
+  color: #cccccc;
+  line-height: 1.4;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #cccccc;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.link-button {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: 2px solid #ffd700;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.link-button:hover {
+  background: #ffd700;
+  color: #0f0c29;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.emoji-tagline {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem 0;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+</style>
 </head>
 <body>
-<h1>∞ Legend Core</h1>
-<p>Authoritative semantic legend for the Infinity system.</p>
+<div class="container">
+  <header>
+    <h1>👑 INFINITY LEGEND SYSTEM</h1>
+    <p class="tagline">🧱 Kris 🔑 • 👑📶⚪ • 🛒📶👑</p>
+    <div class="status">
+      <div class="status-badge">
+        <div class="pulse"></div>
+        <span>⚡ Active</span>
+      </div>
+      <div class="status-badge">
+        <div class="pulse"></div>
+        <span>🧲🪐🔁 Loop Running</span>
+      </div>
+      <div class="status-badge">
+        <span>v1.0.0</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="intro">
+    <h2>🧬 Welcome to the Crown Index</h2>
+    <p>
+      The <strong>Infinity Legend System</strong> is a declarative, immutable, and discoverable semantic operating system.
+      This is the authoritative index of all legend roles, formulas, and flows.
+    </p>
+    <p style="margin-top: 1rem;">
+      <strong>Core Principle:</strong> Repos recognize and link (don't execute). Tokens carry meaning. 
+      Everything builds up, nothing destroys. The system self-propagates through GitHub Pages.
+    </p>
+  </div>
+
+  <section class="section">
+    <h2 class="section-title">📊 Ecosystem Stats</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">33</div>
+        <div class="stat-label">Legend Roles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6</div>
+        <div class="stat-label">Core Formulas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7</div>
+        <div class="stat-label">Color Categories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">Growth Potential</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">🔮 Core Formulas</h2>
+    <div class="formula-grid">
+      <div class="formula-card">
+        <div class="formula-symbol">🛒📶👑</div>
+        <div class="formula-name">Powerful Orchestrator</div>
+        <p>Orchestrator + Nuances + Powerful Token = High-level coordination with semantic precision</p>
+      </div>
+      <div class="formula-card">
+        <div class="formula-symbol">🦾-[📀]-🕹️</div>
+        <div class="formula-name">Robot-Disk-Controller</div>
+        <p>Robot accesses Disk through Controller = Controlled data access pattern</p>
+      </div>
+      <div class="formula-card">
+        <div class="formula-symbol">🦾-[📀]-⚙️</div>
+        <div class="formula-name">Robot-Disk-Gear</div>
+        <p>Robot accesses Disk through Gear = Mechanical data transformation</p>
+      </div>
+      <div class="formula-card">
+        <div class="formula-symbol">👑🔀🎛️</div>
+        <div class="formula-name">Crown-Router-Spine</div>
+        <p>Crown Index routes through Spine = Authoritative routing architecture</p>
+      </div>
+      <div class="formula-card">
+        <div class="formula-symbol">🧲🪐🔁</div>
+        <div class="formula-name">Magnet-Memory-Loop</div>
+        <p>Magnet attracts to Memory in Loop = Persistent attraction cycle (the heartbeat)</p>
+      </div>
+      <div class="formula-card">
+        <div class="formula-symbol">⚡🪡🟡</div>
+        <div class="formula-name">Spark-Weaver-Emitter</div>
+        <p>Spark creates, Weaver connects, Emitter publishes = Creation to publication pipeline</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">🎨 Legend Roles</h2>
+    <div class="roles-grid" id="rolesGrid">
+      <!-- Roles will be populated by JavaScript -->
+    </div>
+  </section>
+
+  <div class="emoji-tagline">
+    🍄🍄👲🏻🏰🏰👸🏼🍄🐢💗⚡⚡⚡🌟👻🎮🕹️👾
+  </div>
+
+  <section class="section">
+    <h2 class="section-title">🔗 System Links</h2>
+    <div class="links">
+      <a href="./legend.json" class="link-button">
+        📄 legend.json
+      </a>
+      <a href="./LEGEND.md" class="link-button">
+        📖 Documentation
+      </a>
+      <a href="./spark/index.html" class="link-button">
+        ⚡ Spark Builder
+      </a>
+      <a href="./unified_index.html" class="link-button">
+        🔗 Unified Index
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>👑 Infinity Legend System v1.0.0</p>
+    <p>Never stops growing. Every moment adds, never subtracts.</p>
+    <p style="margin-top: 1rem;">🧲🪐🔁 Loop Active • Status: 🟢 OPERATIONAL</p>
+  </footer>
+</div>
+
+<script>
+// Load and display roles from legend.json
+fetch('./legend.json')
+  .then(response => response.json())
+  .then(data => {
+    const rolesGrid = document.getElementById('rolesGrid');
+    const roles = data.roles;
+    
+    for (const [key, role] of Object.entries(roles)) {
+      const card = document.createElement('div');
+      card.className = 'role-card';
+      card.innerHTML = `
+        <div class="role-symbol">${role.symbol}</div>
+        <div class="role-name">${key.replace(/_/g, ' ')}</div>
+        <div class="role-meaning">${role.meaning}</div>
+      `;
+      rolesGrid.appendChild(card);
+    }
+  })
+  .catch(error => {
+    console.error('Error loading legend.json:', error);
+    document.getElementById('rolesGrid').innerHTML = 
+      '<p style="color: #ff6b6b;">Error loading roles. Please ensure legend.json is present.</p>';
+  });
+</script>
 </body>
 </html>
