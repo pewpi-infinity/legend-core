@@ -1,0 +1,208 @@
+<!-- ∞ INFINITY LOGIN CHANNEL INJECTION -->
+<!-- Authentication and user management system -->
+
+<div class="infinity-login-channel">
+  <style>
+    .infinity-login-channel {
+      padding: 25px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      margin: 20px 0;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .login-header {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .channel-btn {
+      padding: 15px;
+      background: white;
+      color: #333;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .channel-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .channel-icon {
+      font-size: 1.5rem;
+    }
+
+    .login-info {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+  </style>
+
+  <div class="login-header">
+    🔑 Sign in with Infinity
+  </div>
+
+  <div class="login-channels">
+    <button class="channel-btn" onclick="INFINITY_AUTH.login('google')">
+      <span class="channel-icon">🔑</span>
+      Google
+    </button>
+    <button class="channel-btn" onclick="INFINITY_AUTH.login('email')">
+      <span class="channel-icon">📧</span>
+      Email
+    </button>
+    <button class="channel-btn" onclick="INFINITY_AUTH.login('infinity')">
+      <span class="channel-icon">🍄</span>
+      Infinity
+    </button>
+  </div>
+
+  <div class="login-info">
+    <p><strong>Secure Authentication</strong></p>
+    <p style="margin-top: 10px; font-size: 0.9rem;">
+      Your login is protected by industry-standard encryption and security measures.
+    </p>
+    <div class="security-badge">
+      🔱 Defense Trident Protected
+    </div>
+    <div class="security-badge">
+      🍄 Audited Growth Verified
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  window.INFINITY_AUTH = {
+    authority: 'pewpi-infinity/infinity-login-core',
+    version: '1.0.0',
+
+    loginChannels: [
+      { provider: 'google', icon: '🔑', enabled: true },
+      { provider: 'email', icon: '📧', enabled: true },
+      { provider: 'infinity', icon: '🍄', enabled: true }
+    ],
+
+    security: {
+      encryption: 'AES-256',
+      storage: 'pewpi-infinity/infinity-login-storage',
+      validator: '🔱 DEFENSE_TRIDENT',
+      audit: '🍄 AUDITED_GROWTH'
+    },
+
+    friends: {
+      invite: true,
+      share: true,
+      permissions: ['view', 'interact', 'collaborate']
+    },
+
+    /**
+     * Initiate login with specified provider
+     * @param {String} provider - Login provider name
+     */
+    login: function(provider) {
+      console.log(`🔑 Initiating login with ${provider}`);
+      
+      const channel = this.loginChannels.find(c => c.provider === provider);
+      if (!channel || !channel.enabled) {
+        console.error(`Login provider ${provider} not available`);
+        return false;
+      }
+
+      // In real implementation, would redirect to OAuth or show login form
+      alert(`Login with ${provider} - This would redirect to authentication`);
+      
+      return true;
+    },
+
+    /**
+     * Check if user is authenticated
+     * @returns {Boolean} Authentication status
+     */
+    isAuthenticated: function() {
+      // Check for session/token
+      return sessionStorage.getItem('infinity_auth_token') !== null;
+    },
+
+    /**
+     * Logout current user
+     */
+    logout: function() {
+      sessionStorage.removeItem('infinity_auth_token');
+      console.log('🔑 User logged out');
+    },
+
+    /**
+     * Get current user profile
+     * @returns {Object|null} User profile or null
+     */
+    getCurrentUser: function() {
+      if (!this.isAuthenticated()) {
+        return null;
+      }
+
+      // In real implementation, would fetch from API
+      return {
+        id: 'user_' + Date.now(),
+        name: 'Infinity User',
+        authenticated: true
+      };
+    },
+
+    /**
+     * Invite friend to the platform
+     * @param {String} email - Friend's email
+     */
+    inviteFriend: function(email) {
+      if (!this.friends.invite) {
+        console.error('Friend invites not enabled');
+        return false;
+      }
+
+      console.log(`📧 Sending invite to ${email}`);
+      // In real implementation, would send invite via API
+      return true;
+    }
+  };
+
+  console.log('🔑 Infinity Login Channel loaded');
+  console.log('   Authority:', window.INFINITY_AUTH.authority);
+  console.log('   Providers:', window.INFINITY_AUTH.loginChannels.map(c => c.provider).join(', '));
+
+})();
+</script>

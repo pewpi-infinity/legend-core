@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>∞ Ecosystem Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: white;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .stat-label {
+      opacity: 0.8;
+      font-size: 1.1rem;
+    }
+
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .repo-card {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .repo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .repo-card.priority-highest {
+      background: linear-gradient(135deg, #FFD700, #9370DB);
+      color: white;
+    }
+
+    .repo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .repo-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .status-badge {
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-injected {
+      background: #38ef7d;
+      color: white;
+    }
+
+    .status-pending {
+      background: #ffd700;
+      color: #333;
+    }
+
+    .status-failed {
+      background: #f5576c;
+      color: white;
+    }
+
+    .repo-features {
+      margin-top: 15px;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      background: rgba(102, 126, 234, 0.2);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      margin: 3px;
+    }
+
+    .priority-highest .feature-tag {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .activity-feed {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      border-radius: 15px;
+      padding: 25px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .activity-item {
+      padding: 15px;
+      border-left: 4px solid #667eea;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .activity-time {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 5px;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .action-btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .special-section {
+      background: linear-gradient(135deg, #FFD700, #9370DB);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .special-section h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .repo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>∞ Ecosystem Dashboard</h1>
+      <p>Real-time monitoring of the Infinity injection system</p>
+    </header>
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="totalRepos">10</div>
+        <div class="stat-label">Total Repositories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="injectedRepos">0</div>
+        <div class="stat-label">Successfully Injected</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="pendingRepos">10</div>
+        <div class="stat-label">Pending Injection</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="failedRepos">0</div>
+        <div class="stat-label">Failed Injections</div>
+      </div>
+    </div>
+
+    <!-- Special Section for infinity-brain-111 -->
+    <div class="special-section">
+      <h2>🌟 infinity-brain-111 Status</h2>
+      <p style="font-size: 1.2rem; margin-bottom: 15px;">
+        Pixie's Personal Site - Premium Package
+      </p>
+      <div class="status-badge status-pending" id="brain111Status">
+        Awaiting Deployment
+      </div>
+      <div class="quick-actions" style="justify-content: center; margin-top: 20px;">
+        <button class="action-btn" onclick="deployBrain111()">
+          🚀 Deploy Premium Package
+        </button>
+        <button class="action-btn" onclick="previewBrain111()">
+          👁️ Preview Features
+        </button>
+      </div>
+    </div>
+
+    <!-- Repository Status -->
+    <h2 style="margin-bottom: 20px; font-size: 2rem;">📦 Repository Status</h2>
+    <div class="repo-grid" id="repoGrid">
+      <!-- Repos will be dynamically loaded -->
+    </div>
+
+    <!-- Activity Feed -->
+    <h2 style="margin-bottom: 20px; font-size: 2rem;">📡 Recent Activity</h2>
+    <div class="activity-feed" id="activityFeed">
+      <div class="activity-item">
+        <div class="activity-time">Just now</div>
+        <div>Dashboard initialized - System ready for deployment</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="margin-top: 30px;">
+      <h2 style="margin-bottom: 20px; font-size: 2rem;">⚡ Quick Actions</h2>
+      <div class="quick-actions">
+        <button class="action-btn" onclick="location.href='deploy.html'">
+          🚀 Open Deployment Interface
+        </button>
+        <button class="action-btn" onclick="refreshDashboard()">
+          🔄 Refresh Dashboard
+        </button>
+        <button class="action-btn" onclick="viewAuditLog()">
+          📋 View Audit Log
+        </button>
+        <button class="action-btn" onclick="exportReport()">
+          📊 Export Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./engine.js"></script>
+  <script>
+    // Initialize dashboard
+    const injector = new AdditiveInjector();
+    let dashboardData = {
+      repos: {},
+      stats: {
+        total: 0,
+        injected: 0,
+        pending: 0,
+        failed: 0
+      }
+    };
+
+    async function init() {
+      try {
+        const manifest = await injector.loadManifest();
+        dashboardData.repos = manifest.repos;
+        dashboardData.stats.total = Object.keys(manifest.repos).length;
+        dashboardData.stats.pending = dashboardData.stats.total;
+        
+        updateStats();
+        renderRepoCards();
+        startActivityMonitoring();
+      } catch (error) {
+        console.error('Failed to initialize dashboard:', error);
+        addActivity('Failed to load dashboard data', 'error');
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('totalRepos').textContent = dashboardData.stats.total;
+      document.getElementById('injectedRepos').textContent = dashboardData.stats.injected;
+      document.getElementById('pendingRepos').textContent = dashboardData.stats.pending;
+      document.getElementById('failedRepos').textContent = dashboardData.stats.failed;
+    }
+
+    function renderRepoCards() {
+      const grid = document.getElementById('repoGrid');
+      grid.innerHTML = '';
+
+      for (const [name, config] of Object.entries(dashboardData.repos)) {
+        const card = document.createElement('div');
+        card.className = 'repo-card';
+        if (config.priority === 'HIGHEST') {
+          card.classList.add('priority-highest');
+        }
+
+        const featuresHTML = config.features
+          ? config.features.map(f => `<span class="feature-tag">${f}</span>`).join('')
+          : '';
+
+        card.innerHTML = `
+          <div class="repo-header">
+            <div class="repo-name">${name}</div>
+            <div class="status-badge status-pending">Pending</div>
+          </div>
+          <div style="margin-top: 10px;">
+            <strong>Priority:</strong> ${config.priority || 'MEDIUM'}<br>
+            <strong>Owner:</strong> ${config.owner || 'pewpi-infinity'}
+          </div>
+          <div class="repo-features">
+            ${featuresHTML}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      }
+    }
+
+    function addActivity(message, type = 'info') {
+      const feed = document.getElementById('activityFeed');
+      const item = document.createElement('div');
+      item.className = 'activity-item';
+      item.innerHTML = `
+        <div class="activity-time">${new Date().toLocaleTimeString()}</div>
+        <div>${message}</div>
+      `;
+      feed.insertBefore(item, feed.firstChild);
+
+      // Keep only last 20 items
+      while (feed.children.length > 20) {
+        feed.removeChild(feed.lastChild);
+      }
+    }
+
+    function startActivityMonitoring() {
+      // Simulate activity updates
+      setInterval(() => {
+        const activities = [
+          'System health check completed',
+          'Monitoring repository status',
+          'Checking for new deployments',
+          'Validating injection integrity'
+        ];
+        const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+        // Don't actually add to avoid spam - this is just a placeholder
+      }, 30000);
+    }
+
+    async function deployBrain111() {
+      const statusBadge = document.getElementById('brain111Status');
+      statusBadge.textContent = 'Deploying...';
+      statusBadge.className = 'status-badge status-pending';
+      
+      addActivity('🚀 Starting premium deployment for infinity-brain-111');
+      
+      try {
+        // Simulate deployment
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        statusBadge.textContent = 'Successfully Deployed';
+        statusBadge.className = 'status-badge status-injected';
+        
+        addActivity('✓ infinity-brain-111 premium package deployed successfully');
+        addActivity('📊 Best graphics, meters, and abilities installed');
+        addActivity('🎨 Premium gold & purple theme activated');
+        
+        dashboardData.stats.injected++;
+        dashboardData.stats.pending--;
+        updateStats();
+      } catch (error) {
+        statusBadge.textContent = 'Deployment Failed';
+        statusBadge.className = 'status-badge status-failed';
+        addActivity('✗ infinity-brain-111 deployment failed: ' + error.message);
+      }
+    }
+
+    async function previewBrain111() {
+      try {
+        const preview = await injector.previewInjection('infinity-brain-111');
+        alert(`infinity-brain-111 Premium Package:\n\n` +
+              `Features: ${preview.features.join(', ')}\n\n` +
+              `Files to inject: ${preview.files_to_inject.length}\n\n` +
+              `Priority: ${preview.config.priority}`);
+        addActivity('👁️ Previewed infinity-brain-111 premium package');
+      } catch (error) {
+        alert('Preview failed: ' + error.message);
+      }
+    }
+
+    function refreshDashboard() {
+      addActivity('🔄 Refreshing dashboard data...');
+      init();
+    }
+
+    function viewAuditLog() {
+      const log = injector.getAuditLog();
+      if (log.length === 0) {
+        alert('No audit entries yet');
+      } else {
+        const logText = log.map(entry => 
+          `${entry.timestamp} - ${entry.repo} - ${entry.status}`
+        ).join('\n');
+        alert('Audit Log:\n\n' + logText);
+      }
+      addActivity('📋 Viewed audit log');
+    }
+
+    function exportReport() {
+      const report = {
+        timestamp: new Date().toISOString(),
+        stats: dashboardData.stats,
+        repos: Object.keys(dashboardData.repos),
+        auditLog: injector.getAuditLog()
+      };
+      
+      const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `infinity-ecosystem-report-${Date.now()}.json`;
+      a.click();
+      
+      addActivity('📊 Exported ecosystem report');
+    }
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>

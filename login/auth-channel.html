@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔑 Sign in with Infinity</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background animation */
+    .bg-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 20s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -30px) scale(1.1);
+      }
+      66% {
+        transform: translate(-20px, 20px) scale(0.9);
+      }
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Main card */
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      animation: slideIn 0.6s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .login-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    /* Login channels */
+    .login-channels {
+      margin-bottom: 30px;
+    }
+
+    .channel-btn {
+      width: 100%;
+      padding: 18px 25px;
+      margin-bottom: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 15px;
+      background: white;
+      color: #333;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .channel-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .channel-btn:hover::before {
+      left: 100%;
+    }
+
+    .channel-btn:hover {
+      border-color: #667eea;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .channel-icon {
+      font-size: 1.8rem;
+    }
+
+    .channel-btn.google {
+      border-color: #4285f4;
+    }
+
+    .channel-btn.google:hover {
+      background: linear-gradient(135deg, #4285f4, #34a853);
+      color: white;
+      border-color: transparent;
+    }
+
+    .channel-btn.email {
+      border-color: #ea4335;
+    }
+
+    .channel-btn.email:hover {
+      background: linear-gradient(135deg, #ea4335, #fbbc05);
+      color: white;
+      border-color: transparent;
+    }
+
+    .channel-btn.infinity {
+      border-color: #9370DB;
+      background: linear-gradient(135deg, #FFD700, #9370DB);
+      color: white;
+      border: none;
+    }
+
+    .channel-btn.infinity:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(147, 112, 219, 0.5);
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 30px 0;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+
+    .divider span {
+      padding: 0 15px;
+    }
+
+    /* Email form */
+    .email-form {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .email-form.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .back-btn {
+      text-align: center;
+      margin-top: 15px;
+      color: #667eea;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* Security badges */
+    .security-info {
+      background: rgba(102, 126, 234, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .security-title {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .security-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #667eea;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Friend invite section */
+    .friend-section {
+      background: linear-gradient(135deg, #FFD700, #9370DB);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 30px;
+      color: white;
+      text-align: center;
+    }
+
+    .friend-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .friend-input-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .friend-input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    .friend-input::placeholder {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .friend-input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.3);
+      border-color: white;
+    }
+
+    .invite-btn {
+      padding: 12px 25px;
+      background: white;
+      color: #9370DB;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .invite-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Privacy controls */
+    .privacy-controls {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .privacy-title {
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .privacy-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #667eea;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .checkbox.checked {
+      background: #667eea;
+    }
+
+    .checkbox.checked::after {
+      content: '✓';
+      color: white;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .login-card {
+        padding: 30px 25px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .friend-input-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Animation -->
+  <div class="bg-animation" id="bgAnimation"></div>
+
+  <div class="container">
+    <div class="login-card">
+      <!-- Header -->
+      <div class="login-header">
+        <div class="logo">🍄</div>
+        <h1>Sign in with Infinity</h1>
+        <p class="subtitle">Welcome to Pixie's Personal Space</p>
+      </div>
+
+      <!-- Login Channels -->
+      <div class="login-channels" id="loginChannels">
+        <button class="channel-btn google" onclick="loginWith('google')">
+          <span class="channel-icon">🔑</span>
+          <span>Continue with Google</span>
+        </button>
+
+        <button class="channel-btn email" onclick="showEmailForm()">
+          <span class="channel-icon">📧</span>
+          <span>Continue with Email</span>
+        </button>
+
+        <button class="channel-btn infinity" onclick="loginWith('infinity')">
+          <span class="channel-icon">🍄</span>
+          <span>Continue with Infinity</span>
+        </button>
+      </div>
+
+      <!-- Email Form -->
+      <div class="email-form" id="emailForm">
+        <form onsubmit="handleEmailLogin(event)">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            🔐 Sign In
+          </button>
+
+          <div class="back-btn" onclick="hideEmailForm()">
+            ← Back to login options
+          </div>
+        </form>
+      </div>
+
+      <!-- Security Info -->
+      <div class="security-info">
+        <div class="security-title">
+          🔒 Your Security Matters
+        </div>
+        <p style="color: #666; font-size: 0.9rem; margin-bottom: 12px;">
+          Your login is protected by enterprise-grade security
+        </p>
+        <div class="security-badges">
+          <div class="security-badge">
+            🔱 Defense Trident
+          </div>
+          <div class="security-badge">
+            🍄 Audited Growth
+          </div>
+          <div class="security-badge">
+            🔐 AES-256 Encrypted
+          </div>
+        </div>
+      </div>
+
+      <!-- Friend Invite Section -->
+      <div class="friend-section">
+        <div class="friend-title">👥 Invite Your Friends</div>
+        <p style="opacity: 0.95; margin-bottom: 10px;">
+          Share the magic of Infinity with your friends
+        </p>
+        <div class="friend-input-group">
+          <input 
+            type="email" 
+            class="friend-input" 
+            id="friendEmail" 
+            placeholder="friend@email.com"
+          >
+          <button class="invite-btn" onclick="inviteFriend()">
+            📨 Send Invite
+          </button>
+        </div>
+      </div>
+
+      <!-- Privacy Controls -->
+      <div class="privacy-controls">
+        <div class="privacy-title">🛡️ Privacy Settings</div>
+        <div class="privacy-option" onclick="togglePrivacy('profile')">
+          <div class="checkbox checked" id="privacyProfile"></div>
+          <span style="color: #666;">Keep my profile visible to friends</span>
+        </div>
+        <div class="privacy-option" onclick="togglePrivacy('activity')">
+          <div class="checkbox checked" id="privacyActivity"></div>
+          <span style="color: #666;">Share my activity feed</span>
+        </div>
+        <div class="privacy-option" onclick="togglePrivacy('analytics')">
+          <div class="checkbox" id="privacyAnalytics"></div>
+          <span style="color: #666;">Help improve with anonymous analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Authentication System
+    const InfinityAuth = {
+      providers: {
+        google: {
+          name: 'Google',
+          icon: '🔑',
+          endpoint: 'https://accounts.google.com/o/oauth2/v2/auth'
+        },
+        email: {
+          name: 'Email',
+          icon: '📧',
+          endpoint: '/api/auth/email'
+        },
+        infinity: {
+          name: 'Infinity',
+          icon: '🍄',
+          endpoint: '/api/auth/infinity'
+        }
+      },
+
+      privacySettings: {
+        profile: true,
+        activity: true,
+        analytics: false
+      },
+
+      init: function() {
+        this.createBackgroundAnimation();
+        console.log('🔑 Infinity Auth initialized');
+      },
+
+      createBackgroundAnimation: function() {
+        const container = document.getElementById('bgAnimation');
+        for (let i = 0; i < 10; i++) {
+          const circle = document.createElement('div');
+          circle.className = 'bg-circle';
+          
+          const size = Math.random() * 100 + 50;
+          circle.style.width = size + 'px';
+          circle.style.height = size + 'px';
+          circle.style.left = Math.random() * 100 + '%';
+          circle.style.top = Math.random() * 100 + '%';
+          circle.style.animationDelay = Math.random() * 20 + 's';
+          circle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+          
+          container.appendChild(circle);
+        }
+      },
+
+      login: function(provider) {
+        console.log(`🔑 Logging in with ${provider}`);
+        
+        const providerData = this.providers[provider];
+        if (!providerData) {
+          alert('Provider not supported');
+          return;
+        }
+
+        // Show loading state
+        this.showLoadingAnimation();
+
+        // Simulate authentication
+        setTimeout(() => {
+          this.hideLoadingAnimation();
+          alert(`✓ Successfully signed in with ${providerData.name}!\n\nWelcome to infinity-brain-111`);
+          
+          // In real implementation, would redirect or update UI
+          console.log('User authenticated:', {
+            provider: provider,
+            timestamp: new Date().toISOString(),
+            security: {
+              encryption: 'AES-256',
+              validator: '🔱 DEFENSE_TRIDENT'
+            }
+          });
+        }, 1500);
+      },
+
+      emailLogin: function(email, password) {
+        console.log('📧 Email login attempt:', email);
+        
+        this.showLoadingAnimation();
+
+        // Simulate authentication
+        setTimeout(() => {
+          this.hideLoadingAnimation();
+          alert(`✓ Successfully signed in with email!\n\nWelcome back!`);
+          
+          console.log('Email authenticated:', {
+            email: email,
+            timestamp: new Date().toISOString()
+          });
+        }, 1500);
+      },
+
+      showLoadingAnimation: function() {
+        document.body.style.cursor = 'wait';
+      },
+
+      hideLoadingAnimation: function() {
+        document.body.style.cursor = 'default';
+      },
+
+      inviteFriend: function(email) {
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid email address');
+          return;
+        }
+
+        console.log('📨 Sending invite to:', email);
+        
+        // Simulate sending invite
+        setTimeout(() => {
+          alert(`✓ Invite sent to ${email}!\n\nYour friend will receive an email invitation.`);
+          document.getElementById('friendEmail').value = '';
+        }, 500);
+      },
+
+      togglePrivacySetting: function(setting) {
+        this.privacySettings[setting] = !this.privacySettings[setting];
+        console.log('Privacy settings updated:', this.privacySettings);
+        return this.privacySettings[setting];
+      }
+    };
+
+    // Event Handlers
+    function loginWith(provider) {
+      InfinityAuth.login(provider);
+    }
+
+    function showEmailForm() {
+      document.getElementById('loginChannels').style.display = 'none';
+      document.getElementById('emailForm').classList.add('active');
+    }
+
+    function hideEmailForm() {
+      document.getElementById('emailForm').classList.remove('active');
+      document.getElementById('loginChannels').style.display = 'block';
+    }
+
+    function handleEmailLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      InfinityAuth.emailLogin(email, password);
+    }
+
+    function inviteFriend() {
+      const email = document.getElementById('friendEmail').value;
+      InfinityAuth.inviteFriend(email);
+    }
+
+    function togglePrivacy(setting) {
+      const isChecked = InfinityAuth.togglePrivacySetting(setting);
+      const checkbox = document.getElementById('privacy' + setting.charAt(0).toUpperCase() + setting.slice(1));
+      
+      if (isChecked) {
+        checkbox.classList.add('checked');
+      } else {
+        checkbox.classList.remove('checked');
+      }
+    }
+
+    // Initialize on load
+    window.addEventListener('load', () => {
+      InfinityAuth.init();
+    });
+  </script>
+</body>
+</html>

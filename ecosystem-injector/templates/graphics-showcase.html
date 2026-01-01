@@ -1,0 +1,298 @@
+<!-- ∞ INFINITY GRAPHICS SHOWCASE TEMPLATE -->
+<!-- Premium visual effects and animations -->
+
+<div class="infinity-graphics-showcase">
+  <style>
+    .infinity-graphics-showcase {
+      padding: 30px;
+      background: linear-gradient(135deg, #FFD700, #9370DB);
+      border-radius: 20px;
+      margin: 20px 0;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .graphics-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-20px) translateX(10px);
+      }
+    }
+
+    .graphics-header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .graphics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .graphics-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 25px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .graphics-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 15px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .card-description {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+  </style>
+
+  <div class="graphics-particles" id="particleContainer"></div>
+
+  <button class="theme-toggle" onclick="INFINITY_GRAPHICS.toggleTheme()">
+    🌙 Toggle Theme
+  </button>
+
+  <div class="graphics-header">
+    ✨ Best Graphics Display
+  </div>
+
+  <div class="graphics-grid">
+    <div class="graphics-card" onclick="INFINITY_GRAPHICS.activateEffect('particles')">
+      <div class="card-icon">✨</div>
+      <div class="card-title">Particles</div>
+      <div class="card-description">Beautiful floating particle effects</div>
+    </div>
+
+    <div class="graphics-card" onclick="INFINITY_GRAPHICS.activateEffect('gradients')">
+      <div class="card-icon">🌈</div>
+      <div class="card-title">Gradients</div>
+      <div class="card-description">Stunning color transitions</div>
+    </div>
+
+    <div class="graphics-card" onclick="INFINITY_GRAPHICS.activateEffect('animations')">
+      <div class="card-icon">💫</div>
+      <div class="card-title">Animations</div>
+      <div class="card-description">Smooth motion effects</div>
+    </div>
+
+    <div class="graphics-card" onclick="INFINITY_GRAPHICS.activateEffect('3d')">
+      <div class="card-icon">🎲</div>
+      <div class="card-title">3D Transform</div>
+      <div class="card-description">CSS 3D transformations</div>
+    </div>
+
+    <div class="graphics-card" onclick="INFINITY_GRAPHICS.activateEffect('glass')">
+      <div class="card-icon">🪟</div>
+      <div class="card-title">Glassmorphism</div>
+      <div class="card-description">Frosted glass effects</div>
+    </div>
+
+    <div class="graphics-card" onclick="INFINITY_GRAPHICS.activateEffect('webgl')">
+      <div class="card-icon">🎨</div>
+      <div class="card-title">WebGL</div>
+      <div class="card-description">Advanced GPU rendering</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  window.INFINITY_GRAPHICS = {
+    theme: 'dark',
+    effects: {
+      particles: true,
+      gradients: true,
+      animations: true,
+      '3d': true,
+      glass: true,
+      webgl: false // Requires WebGL support
+    },
+
+    /**
+     * Initialize graphics system
+     */
+    init: function() {
+      this.createParticles();
+      console.log('✨ Infinity Graphics System loaded');
+    },
+
+    /**
+     * Create particle effects
+     */
+    createParticles: function() {
+      const container = document.getElementById('particleContainer');
+      if (!container) return;
+
+      // Create 20 particles
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random size and position
+        const size = Math.random() * 10 + 5;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        
+        container.appendChild(particle);
+      }
+    },
+
+    /**
+     * Activate a specific effect
+     * @param {String} effectName - Name of the effect to activate
+     */
+    activateEffect: function(effectName) {
+      console.log(`✨ Activating effect: ${effectName}`);
+      
+      if (this.effects[effectName] === false) {
+        alert(`${effectName} effect requires additional setup`);
+        return;
+      }
+
+      // Create visual feedback
+      const showcase = document.querySelector('.infinity-graphics-showcase');
+      if (showcase) {
+        showcase.style.animation = 'none';
+        setTimeout(() => {
+          showcase.style.animation = 'pulse 0.5s ease';
+        }, 10);
+      }
+
+      alert(`${effectName} effect activated! 🎨`);
+    },
+
+    /**
+     * Toggle between dark and light theme
+     */
+    toggleTheme: function() {
+      this.theme = this.theme === 'dark' ? 'light' : 'dark';
+      
+      const showcase = document.querySelector('.infinity-graphics-showcase');
+      if (showcase) {
+        if (this.theme === 'light') {
+          showcase.style.background = 'linear-gradient(135deg, #ffeaa7, #dfe6e9)';
+          showcase.style.color = '#333';
+        } else {
+          showcase.style.background = 'linear-gradient(135deg, #FFD700, #9370DB)';
+          showcase.style.color = 'white';
+        }
+      }
+
+      console.log(`🌙 Theme switched to: ${this.theme}`);
+    },
+
+    /**
+     * Check WebGL support
+     * @returns {Boolean} True if WebGL is supported
+     */
+    hasWebGLSupport: function() {
+      try {
+        const canvas = document.createElement('canvas');
+        return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+      } catch (e) {
+        return false;
+      }
+    }
+  };
+
+  // Auto-initialize
+  if (document.readyState === 'complete') {
+    window.INFINITY_GRAPHICS.init();
+  } else {
+    window.addEventListener('load', function() {
+      window.INFINITY_GRAPHICS.init();
+    });
+  }
+
+  // Check WebGL support
+  if (window.INFINITY_GRAPHICS.hasWebGLSupport()) {
+    window.INFINITY_GRAPHICS.effects.webgl = true;
+  }
+
+})();
+</script>

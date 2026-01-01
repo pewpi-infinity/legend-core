@@ -1,0 +1,195 @@
+{
+  "version": "1.0.0",
+  "ecosystem": "pewpi-infinity",
+  "authority": "legend-core",
+  "repos": {
+    "infinity-brain-111": {
+      "owner": "pixie",
+      "priority": "HIGHEST",
+      "roles": ["CROWN_INDEX", "FACET_CONVERTER", "TOKEN_VIEWER", "LICENSED_INDEX"],
+      "inject": [
+        "legend.json",
+        "spark/",
+        "graphics/best-displays.html",
+        "meters/live-stats.html",
+        "abilities/gadget-showcase.html",
+        "login/auth-channel.html"
+      ],
+      "features": [
+        "best_graphics",
+        "fantastic_design",
+        "friend_sharing",
+        "login_system",
+        "personal_page_upgrade"
+      ],
+      "pricing": false,
+      "description": "Pixie's personal site - newest gadgets, meters, logic, abilities",
+      "theme": {
+        "primary": "linear-gradient(135deg, #FFD700, #9370DB)",
+        "style": "premium-glassmorphism",
+        "effects": ["particles", "gradients", "animations", "webgl"]
+      }
+    },
+    "legend-core": {
+      "owner": "pewpi-infinity",
+      "priority": "CRITICAL",
+      "roles": ["MASTER_AUTHORITY", "SEMANTIC_LEGEND", "SYSTEM_CORE"],
+      "inject": [
+        "legend.json",
+        "ecosystem-injector/"
+      ],
+      "features": [
+        "master_legend",
+        "semantic_authority",
+        "ecosystem_management"
+      ],
+      "pricing": false,
+      "description": "Master legend and authority for the entire ecosystem"
+    },
+    "infinity-treasury": {
+      "owner": "pewpi-infinity",
+      "priority": "HIGH",
+      "roles": ["PRICING_AUTHORITY", "VALUE_MANAGER", "LICENSED_HOLDER"],
+      "inject": [
+        "legend.json",
+        "pricing/engine.js",
+        "pricing/dashboard.html"
+      ],
+      "features": [
+        "pricing_engine",
+        "value_calculation",
+        "license_management"
+      ],
+      "pricing": true,
+      "pricing_authority": true,
+      "description": "Central pricing and value management system"
+    },
+    "infinity-login-core": {
+      "owner": "pewpi-infinity",
+      "priority": "HIGH",
+      "roles": ["AUTH_AUTHORITY", "LOGIN_MANAGER", "SESSION_HANDLER"],
+      "inject": [
+        "legend.json",
+        "login/auth-core.js",
+        "login/session-manager.js"
+      ],
+      "features": [
+        "authentication",
+        "session_management",
+        "oauth_integration"
+      ],
+      "pricing": false,
+      "description": "Central authentication and login service"
+    },
+    "infinity-login-oauth": {
+      "owner": "pewpi-infinity",
+      "priority": "MEDIUM",
+      "roles": ["OAUTH_PROVIDER", "EXTERNAL_AUTH"],
+      "inject": [
+        "legend.json",
+        "login/oauth-providers.js"
+      ],
+      "features": [
+        "google_oauth",
+        "github_oauth",
+        "provider_integration"
+      ],
+      "pricing": false,
+      "description": "OAuth provider integrations"
+    },
+    "infinity-login-storage": {
+      "owner": "pewpi-infinity",
+      "priority": "HIGH",
+      "roles": ["USER_STORAGE", "DATA_KEEPER"],
+      "inject": [
+        "legend.json",
+        "storage/user-data.js"
+      ],
+      "features": [
+        "secure_storage",
+        "user_profiles",
+        "data_encryption"
+      ],
+      "pricing": false,
+      "description": "Secure user data storage system"
+    },
+    "infinity-login-security": {
+      "owner": "pewpi-infinity",
+      "priority": "CRITICAL",
+      "roles": ["SECURITY_VALIDATOR", "ENCRYPTION_MANAGER", "DEFENSE_TRIDENT"],
+      "inject": [
+        "legend.json",
+        "security/validator.js",
+        "security/encryption.js"
+      ],
+      "features": [
+        "security_validation",
+        "encryption",
+        "audit_logging"
+      ],
+      "pricing": false,
+      "description": "🔱 Security validation and encryption service"
+    },
+    "infinity-login-friends": {
+      "owner": "pewpi-infinity",
+      "priority": "MEDIUM",
+      "roles": ["FRIEND_MANAGER", "SOCIAL_CONNECTOR"],
+      "inject": [
+        "legend.json",
+        "friends/manager.js",
+        "friends/invites.html"
+      ],
+      "features": [
+        "friend_management",
+        "invitations",
+        "sharing"
+      ],
+      "pricing": false,
+      "description": "Friend management and social features"
+    },
+    "infinity-spark": {
+      "owner": "pewpi-infinity",
+      "priority": "HIGH",
+      "roles": ["SPARK_BUILDER", "COMPONENT_FACTORY"],
+      "inject": [
+        "legend.json",
+        "spark/builder.js",
+        "spark/components.html"
+      ],
+      "features": [
+        "spark_building",
+        "component_creation",
+        "template_system"
+      ],
+      "pricing": false,
+      "description": "Spark component builder and factory"
+    }
+  },
+  "injection_rules": {
+    "mode": "additive_only",
+    "never_remove": true,
+    "merge_strategy": {
+      "html": "insert_before_closing_tag",
+      "js": "append_with_namespace",
+      "json": "deep_merge",
+      "css": "append_with_scope"
+    },
+    "rollback": {
+      "enabled": true,
+      "backup_before_inject": true,
+      "max_rollback_history": 10
+    }
+  },
+  "cross_links": {
+    "all_repos_to_legend_core": true,
+    "pricing_repos_to_treasury": true,
+    "login_repos_to_login_core": true,
+    "brain_111_showcases_all": true
+  },
+  "audit": {
+    "enabled": true,
+    "log_all_injections": true,
+    "notify_on_completion": true,
+    "validator": "🍄 AUDITED_GROWTH"
+  }
+}
