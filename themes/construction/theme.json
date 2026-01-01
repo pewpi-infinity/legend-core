@@ -1,0 +1,77 @@
+{
+  "theme": "construction",
+  "name": "Construction Site",
+  "emoji": "🏗️",
+  "version": "1.0.0",
+  "description": "Construction site with heavy machinery, building plans, and large-scale projects",
+  
+  "visual": {
+    "primary_color": "#ffff00",
+    "secondary_color": "#ff6600",
+    "accent_color": "#000000",
+    "background": "linear-gradient(135deg, #8b7355, #a0826d, #8b7355)",
+    "font_family": "'Industrial', 'Arial Black', sans-serif",
+    "effects": ["dust_particles", "crane_shadow", "blueprint_grid"]
+  },
+  
+  "heavy_machinery": {
+    "lifting": ["🏗️ Tower Crane", "🏗️ Mobile Crane", "🏗️ Overhead Crane"],
+    "earthmoving": ["🚜 Bulldozer", "🚧 Excavator", "🚜 Backhoe", "🚜 Loader"],
+    "transport": ["🚛 Dump Truck", "🚚 Cement Mixer", "🚛 Flatbed", "🚛 Crane Truck"],
+    "compaction": ["🚜 Roller", "🚧 Compactor", "🔨 Pile Driver"]
+  },
+  
+  "hand_tools": {
+    "striking": ["🔨 Hammer", "🔨 Sledgehammer", "🔨 Mallet"],
+    "cutting": ["🪚 Saw", "✂️ Snips", "🗡️ Utility Knife", "⚔️ Angle Grinder"],
+    "fastening": ["🔩 Screwdriver", "🔧 Wrench", "🔩 Drill", "🔫 Nail Gun"],
+    "measuring": ["📏 Tape Measure", "📐 Level", "📐 Square", "🧭 Transit"]
+  },
+  
+  "materials": {
+    "structural": ["🔩 Steel Beams", "🧱 Concrete", "🪵 Lumber", "🧱 Masonry"],
+    "finishing": ["🪟 Glass", "🚪 Doors", "🪟 Windows", "🎨 Paint"],
+    "roofing": ["🏠 Shingles", "🏠 Metal Roofing", "🏠 Tiles"],
+    "insulation": ["🧵 Fiberglass", "🧱 Foam Board", "🧵 Spray Foam"]
+  },
+  
+  "planning": {
+    "drawings": ["🗺️ Blueprint", "📐 Floor Plan", "📊 Elevation", "🗺️ Site Plan"],
+    "software": ["💻 CAD Design", "🖥️ BIM Model", "📊 Project Schedule", "💰 Cost Estimate"],
+    "specifications": ["📋 Building Code", "📋 Material Specs", "📋 Safety Standards"]
+  },
+  
+  "phases": {
+    "preparation": ["🚧 Site Clearing", "🚜 Excavation", "📏 Surveying", "📍 Layout"],
+    "foundation": ["🧱 Footings", "🧱 Foundation Walls", "🚰 Drainage", "💧 Waterproofing"],
+    "structure": ["🔩 Frame", "🏗️ Steel Erection", "🧱 Masonry", "🏠 Roof"],
+    "finishing": ["⚡ Electrical", "🚰 Plumbing", "❄️ HVAC", "🎨 Paint", "🪟 Windows"]
+  },
+  
+  "safety": {
+    "ppe": ["⛑️ Hard Hat", "🦺 Safety Vest", "🥾 Steel-Toe Boots", "🧤 Work Gloves", "🥽 Safety Glasses"],
+    "equipment": ["🚧 Barriers", "⚠️ Warning Signs", "🚧 Scaffolding", "🪜 Fall Protection"],
+    "protocols": ["📋 Safety Meeting", "✅ Inspection", "📋 Permits", "🚨 Emergency Plan"]
+  },
+  
+  "trades": {
+    "structural": ["🏗️ Ironworker", "🧱 Mason", "🪵 Carpenter"],
+    "systems": ["⚡ Electrician", "🚰 Plumber", "❄️ HVAC Tech"],
+    "finishing": ["🎨 Painter", "🏠 Roofer", "🪟 Glazier"],
+    "specialty": ["🚧 Heavy Equipment Operator", "👷 Project Manager", "📐 Engineer"]
+  },
+  
+  "project_types": {
+    "residential": ["🏠 Single Family", "🏢 Multi-Family", "🏘️ Development"],
+    "commercial": ["🏢 Office", "🏪 Retail", "🏨 Hotel"],
+    "industrial": ["🏭 Factory", "🏭 Warehouse", "⚡ Power Plant"],
+    "infrastructure": ["🌉 Bridge", "🛣️ Highway", "🚇 Tunnel"]
+  },
+  
+  "legend_integration": {
+    "roles": ["ASSEMBLER", "ORCHESTRATOR", "BUILDER", "MONITOR", "VALIDATOR"],
+    "formulas": ["🗺️ Plan → 🔧 Assembler → 🏗️ Builder → ✅ Validator → 🏢 Structure"],
+    "large_scale": true,
+    "parallel_tasks": true
+  }
+}

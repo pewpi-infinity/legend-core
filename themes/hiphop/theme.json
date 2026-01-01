@@ -1,0 +1,55 @@
+{
+  "theme": "hiphop",
+  "name": "Hip-Hop Studio",
+  "emoji": "🎤",
+  "version": "1.0.0",
+  "description": "Urban recording studio with beats, rhymes, production, and creative energy",
+  
+  "visual": {
+    "primary_color": "#ffff00",
+    "secondary_color": "#000000",
+    "accent_color": "#ff0000",
+    "background": "linear-gradient(135deg, #1a1a1a, #2a2a2a, #3a3a3a)",
+    "font_family": "'Graffiti', 'Impact', sans-serif",
+    "effects": ["graffiti", "neon_signs", "vinyl_records"]
+  },
+  
+  "production": {
+    "hardware": ["🎤 Microphone", "🎛️ MPC", "🎚️ Mixer", "🔊 Monitors", "💻 DAW"],
+    "software": ["🎹 Beat Maker", "🎚️ Audio Editor", "🔊 Mastering", "🎶 Sampler"],
+    "instruments": ["🥁 Drum Machine", "🎹 Keyboard", "🎸 Bass", "🎺 Horns"]
+  },
+  
+  "studio_spaces": {
+    "vocal_booth": ["🎙️ Vocal Mic", "🎧 Headphones", "📝 Lyric Stand", "💡 Mood Lighting"],
+    "control_room": ["🎛️ Mixing Board", "🖥️ Computer", "🔊 Speakers", "🪑 Producer Chair"],
+    "lounge": ["🛋️ Couch", "📺 TV", "🎮 Gaming", "🎨 Graffiti Wall"],
+    "equipment": ["💿 Records", "📦 Sample Packs", "🔌 Cables", "🎚️ Controllers"]
+  },
+  
+  "elements": {
+    "beats": ["808", "Trap", "Boom Bap", "Lo-Fi"],
+    "flow": ["Lyrical", "Melodic", "Aggressive", "Storytelling"],
+    "samples": ["Soul", "Jazz", "Funk", "Electronic"],
+    "effects": ["🔄 Reverb", "⏱️ Delay", "🔊 Compression", "⚙️ Auto-Tune"]
+  },
+  
+  "culture": {
+    "pillars": ["MCing 🎤", "DJing 💿", "Graffiti 🎨", "Breaking 💃"],
+    "concepts": ["Rhymes 📝", "Bars 📊", "Flow 🌊", "Cipher 🔄"],
+    "session": ["Freestyle", "Recording", "Mixing", "Mastering"]
+  },
+  
+  "atmosphere": {
+    "vibe": "creative urban",
+    "energy": "focused intensity",
+    "collaboration": "high",
+    "authenticity": "essential"
+  },
+  
+  "legend_integration": {
+    "roles": ["INTAKE_NODE", "WEAVER", "TRANSFORMER", "EMITTER", "AMPLIFIER"],
+    "formulas": ["📥 Intake → 🪡 Weaver → 🔄 Transformer → 📢 Amplifier → 🟡 Emitter"],
+    "sampling_engine": true
+  }
+}

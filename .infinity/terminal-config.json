@@ -1,0 +1,245 @@
+{
+  "mrw_terminal": {
+    "name": "MRW Animated Terminal",
+    "version": "1.0.0",
+    "description": "Mario-themed animated terminal with physics and character interactions",
+    
+    "characters": {
+      "mario": {
+        "name": "Mario",
+        "emoji": "🍄",
+        "sprite": "M",
+        "color": "#ff0000",
+        "states": ["idle", "running", "jumping", "powered"],
+        "abilities": ["jump", "run", "collect_coins", "power_up"],
+        "voice_lines": ["Let's-a-go!", "Wahoo!", "Here we go!"],
+        "physics": {
+          "mass": 1.0,
+          "jump_force": 12,
+          "run_speed": 5,
+          "friction": 0.8
+        }
+      },
+      "luigi": {
+        "name": "Luigi",
+        "emoji": "💚",
+        "sprite": "L",
+        "color": "#00ff00",
+        "states": ["idle", "running", "jumping", "powered"],
+        "abilities": ["high_jump", "run", "collect_coins", "power_up"],
+        "voice_lines": ["Okey-dokey!", "Let's go!", "Yahoo!"],
+        "physics": {
+          "mass": 0.9,
+          "jump_force": 14,
+          "run_speed": 4.5,
+          "friction": 0.85
+        }
+      }
+    },
+    
+    "vehicles": {
+      "kart": {
+        "name": "Mario Kart",
+        "emoji": "🏎️",
+        "states": ["parked", "driving", "drifting", "boosting"],
+        "speed_levels": [1, 2, 3, 4, 5],
+        "animations": {
+          "drive": ["🏎️  ", " 🏎️ ", "  🏎️", "   🏎️"],
+          "boost": ["🏎️💨", "🏎️💨💨", "🏎️💨💨💨"]
+        }
+      },
+      "pipe_cart": {
+        "name": "Pipe Cart",
+        "emoji": "🚂",
+        "states": ["stopped", "moving", "entering_pipe", "exiting_pipe"],
+        "track": true,
+        "speed": 3
+      }
+    },
+    
+    "items": {
+      "mushroom": {
+        "name": "Mushroom",
+        "emoji": "🍄",
+        "type": "power_up",
+        "effect": "grow",
+        "duration": "permanent",
+        "sound": "power_up"
+      },
+      "star": {
+        "name": "Star",
+        "emoji": "⭐",
+        "type": "power_up",
+        "effect": "invincibility",
+        "duration": 10,
+        "sound": "star_theme"
+      },
+      "coin": {
+        "name": "Coin",
+        "emoji": "💰",
+        "type": "collectible",
+        "value": 1,
+        "sound": "coin"
+      },
+      "fire_flower": {
+        "name": "Fire Flower",
+        "emoji": "🌸",
+        "type": "power_up",
+        "effect": "fire_power",
+        "duration": "permanent",
+        "projectile": "🔥"
+      }
+    },
+    
+    "physics_engine": {
+      "type": "capacitor_resistor",
+      "description": "Electronics-inspired jump physics using RC circuit behavior",
+      
+      "capacitor_jump": {
+        "charge_rate": "Rapid charge on jump input (button press)",
+        "discharge_rate": "Exponential decay during fall (RC discharge)",
+        "formula": "V(t) = V₀ * e^(-t/RC)",
+        "feels_like": "Natural spring-loaded jump with smooth landing"
+      },
+      
+      "resistor_friction": {
+        "ground_friction": "Linear resistance when running",
+        "air_resistance": "Quadratic drag during jump",
+        "formula": "F = -k * v² (air) or F = -μ * N (ground)",
+        "feels_like": "Responsive control with realistic momentum"
+      },
+      
+      "parameters": {
+        "gravity": 9.8,
+        "capacitance": 1.0,
+        "resistance": 0.5,
+        "time_constant": "RC = 0.5s",
+        "terminal_velocity": 15,
+        "friction_coefficient": 0.8
+      },
+      
+      "states": {
+        "grounded": {
+          "forces": ["gravity", "normal", "friction"],
+          "control": "full",
+          "can_jump": true
+        },
+        "ascending": {
+          "forces": ["gravity", "air_resistance"],
+          "control": "partial",
+          "capacitor": "discharging"
+        },
+        "descending": {
+          "forces": ["gravity", "air_resistance"],
+          "control": "partial",
+          "terminal_velocity": true
+        }
+      }
+    },
+    
+    "controls": {
+      "joystick": {
+        "type": "8_direction",
+        "emoji": "🕹️",
+        "inputs": {
+          "up": "jump",
+          "down": "crouch",
+          "left": "move_left",
+          "right": "move_right",
+          "up_left": "jump_left",
+          "up_right": "jump_right",
+          "button_a": "jump",
+          "button_b": "run/fire"
+        }
+      },
+      "keyboard": {
+        "arrow_keys": "movement",
+        "space": "jump",
+        "shift": "run",
+        "z": "action",
+        "x": "fire"
+      },
+      "touch": {
+        "left_side": "direction_pad",
+        "right_side": "action_buttons"
+      }
+    },
+    
+    "terminal_features": {
+      "command_line": {
+        "prompt": "🍄 Mario Terminal > ",
+        "commands": {
+          "jump": "Make character jump",
+          "run": "Start running",
+          "coin": "Spawn coin",
+          "star": "Activate star power",
+          "kart": "Spawn kart",
+          "pipe": "Enter pipe",
+          "help": "Show all commands"
+        }
+      },
+      
+      "animations": {
+        "character_move": "Smooth sprite animation",
+        "vehicle_drive": "Frame-by-frame animation",
+        "item_collect": "Particle effects",
+        "power_up": "Growth/transformation animation",
+        "coin_spin": "Rotating coin sprite"
+      },
+      
+      "display": {
+        "width": 80,
+        "height": 24,
+        "charset": "ascii_extended + emoji",
+        "frame_rate": 30,
+        "color_mode": "256_color"
+      },
+      
+      "sound_system": {
+        "method": "web_audio_api",
+        "channels": 4,
+        "sfx": ["jump", "coin", "power_up", "bump", "stomp"],
+        "music": ["overworld", "underground", "castle", "star"],
+        "volume_control": true
+      }
+    },
+    
+    "world_elements": {
+      "blocks": {
+        "brick": "🧱",
+        "question": "❓",
+        "metal": "⬜",
+        "cloud": "☁️"
+      },
+      "terrain": {
+        "ground": "🟩",
+        "pipe": "🟢",
+        "hill": "🏔️",
+        "castle": "🏰"
+      },
+      "enemies": {
+        "goomba": "🟤",
+        "koopa": "🐢",
+        "piranha": "🌿",
+        "bowser": "🐉"
+      }
+    },
+    
+    "game_loop": {
+      "initialization": "Setup canvas, load sprites, init physics",
+      "input_handling": "Process keyboard/joystick input",
+      "physics_update": "Apply forces, update positions",
+      "collision_detection": "Check character vs world/items/enemies",
+      "animation_update": "Update sprite frames",
+      "render": "Draw frame to terminal",
+      "fps": 30
+    }
+  },
+  
+  "integration": {
+    "legend_system": "Terminal uses CONTROLLER, ROBOT_CORE, EMITTER roles",
+    "themes": "Visual theme adapts to selected infinity theme",
+    "memory": "Game state persists in MEMORY_NODE",
+    "spark": "Each game session creates a spark"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "theme": "robotics",
+  "name": "Robotics Workshop",
+  "emoji": "🤖",
+  "version": "1.0.0",
+  "description": "Robotics engineering workshop with automation, programming, and intelligent systems",
+  
+  "visual": {
+    "primary_color": "#ff6600",
+    "secondary_color": "#333333",
+    "accent_color": "#00ff00",
+    "background": "linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a2a1a)",
+    "font_family": "'Roboto Mono', 'Courier New', monospace",
+    "effects": ["robot_movement", "sensor_glow", "circuit_patterns"]
+  },
+  
+  "robot_types": {
+    "humanoid": ["🤖 Humanoid", "👤 Bipedal", "🦾 Arm Robot"],
+    "mobile": ["🚗 Rover", "🚁 Drone", "🛸 Flying Robot"],
+    "industrial": ["🦾 Robotic Arm", "🏭 Assembly Robot", "📦 Picking Robot"],
+    "specialized": ["🐕 Quadruped", "🐍 Snake Robot", "🤿 Underwater"]
+  },
+  
+  "components": {
+    "actuators": ["⚙️ Servo Motor", "⚙️ Stepper Motor", "⚙️ DC Motor", "💨 Pneumatic"],
+    "sensors": ["📡 Distance Sensor", "📷 Camera", "🎤 Microphone", "🌡️ Temperature", "🧲 IMU"],
+    "processors": ["🤖 Arduino", "🤖 Raspberry Pi", "💾 Microcontroller", "🧠 Neural Chip"],
+    "power": ["🔋 Battery", "⚡ Power Module", "🔌 Voltage Regulator"]
+  },
+  
+  "programming": {
+    "languages": ["🐍 Python", "C++ 💻", "💻 C", "☕ Java", "🦀 Rust"],
+    "frameworks": ["ROS 🤖", "Arduino IDE 🤖", "OpenCV 📷", "TensorFlow 🧠"],
+    "concepts": ["🔁 Loops", "🔀 Conditionals", "📦 Functions", "🧠 Classes", "⚡ Events"]
+  },
+  
+  "capabilities": {
+    "perception": ["📷 Vision", "👂 Audio", "👃 Smell", "👅 Touch", "🧲 Position"],
+    "movement": ["🚶 Walking", "🏃 Running", "✋ Grasping", "🔄 Rotation", "⬆️ Lifting"],
+    "intelligence": ["🧠 AI", "📊 Machine Learning", "🎯 Decision Making", "📚 Learning"],
+    "interaction": ["🗣️ Speech", "👁️ Recognition", "🤝 Collaboration", "📡 Communication"]
+  },
+  
+  "control_systems": {
+    "feedback": ["🔁 PID Control", "📊 Kalman Filter", "🎯 Optimization"],
+    "planning": ["🗺️ Path Planning", "🎯 Motion Planning", "⏱️ Trajectory"],
+    "coordination": ["🤝 Multi-Agent", "🔄 Synchronization", "📡 Swarm"]
+  },
+  
+  "workshop": {
+    "tools": ["🔧 Wrench", "🔩 Screwdriver", "✂️ Wire Cutter", "🔨 Hammer", "🔍 Multimeter"],
+    "fabrication": ["🖨️ 3D Printer", "⚙️ CNC", "🔥 Soldering Iron", "✂️ Laser Cutter"],
+    "workbench": ["🔨 Workbench", "📦 Parts Bins", "💻 Computer", "📚 Documentation"]
+  },
+  
+  "projects": {
+    "beginner": ["Line Follower", "Obstacle Avoider", "Remote Control"],
+    "intermediate": ["Autonomous Navigation", "Pick and Place", "Voice Control"],
+    "advanced": ["SLAM", "Manipulation", "Swarm Robotics", "AI Integration"]
+  },
+  
+  "automation": {
+    "tasks": ["🔄 Repetitive Tasks", "📊 Data Collection", "🎯 Precision Work", "⏱️ 24/7 Operation"],
+    "industries": ["🏭 Manufacturing", "🏥 Healthcare", "🌾 Agriculture", "🏢 Warehouse"]
+  },
+  
+  "legend_integration": {
+    "roles": ["ROBOT_CORE", "CONTROLLER", "MONITOR", "ORCHESTRATOR", "GEAR"],
+    "formulas": ["🕹️ Controller → 🦾 Robot Core → ⚙️ Gear → 👁️ Monitor"],
+    "autonomous_execution": true,
+    "sensor_processing": true
+  }
+}

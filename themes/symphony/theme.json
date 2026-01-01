@@ -1,0 +1,57 @@
+{
+  "theme": "symphony",
+  "name": "Symphony Hall",
+  "emoji": "🎻",
+  "version": "1.0.0",
+  "description": "Grand concert hall with orchestral instruments, pristine acoustics, and formal atmosphere",
+  
+  "visual": {
+    "primary_color": "#8b0000",
+    "secondary_color": "#ffd700",
+    "accent_color": "#ffffff",
+    "background": "linear-gradient(135deg, #2c1810, #4a2c1a, #5c3a24)",
+    "font_family": "'Playfair Display', 'Georgia', serif",
+    "effects": ["chandelier_glow", "velvet_curtains", "marble_columns"]
+  },
+  
+  "orchestra_sections": {
+    "strings": ["🎻 Violin I", "🎻 Violin II", "🎻 Viola", "🎻 Cello", "🎻 Double Bass"],
+    "woodwinds": ["🪈 Flute", "🎶 Oboe", "🎶 Clarinet", "🎶 Bassoon"],
+    "brass": ["🎺 French Horn", "🎺 Trumpet", "🎺 Trombone", "🎺 Tuba"],
+    "percussion": ["🥁 Timpani", "🥁 Snare Drum", "🔔 Cymbals", "🎹 Bells"],
+    "keyboard": ["🎹 Piano", "🎹 Harpsichord", "🎹 Organ"]
+  },
+  
+  "hall_features": {
+    "architecture": ["🏛️ Grand Hall", "🎭 Main Stage", "🏛️ Balcony", "🏛️ Box Seats"],
+    "acoustics": ["🔊 Natural Reverb", "🔊 Sound Reflection", "🔊 Perfect Resonance"],
+    "decoration": ["💎 Chandelier", "🖼️ Oil Paintings", "🏛️ Columns", "🪑 Velvet Seats"]
+  },
+  
+  "repertoire": {
+    "symphonies": ["Beethoven", "Mozart", "Brahms", "Tchaikovsky"],
+    "concertos": ["Piano Concerto", "Violin Concerto", "Cello Concerto"],
+    "overtures": ["Opera Overture", "Ballet Suite"],
+    "modern": ["Film Scores", "Contemporary Classical"]
+  },
+  
+  "performance": {
+    "conductor": "🎼 Maestro",
+    "soloists": "Featured performers",
+    "dress_code": "Formal attire",
+    "program_length": "90-120 minutes"
+  },
+  
+  "atmosphere": {
+    "formality": "highest",
+    "volume": "dynamic range",
+    "audience": "attentive silence",
+    "acoustics": "pristine"
+  },
+  
+  "legend_integration": {
+    "roles": ["ORCHESTRATOR", "AGGREGATOR", "WEAVER", "EMITTER", "HEART_NODE"],
+    "formulas": ["🛒 Orchestrator → 📚 Aggregator → 🪡 Weaver → 🟡 Emitter"],
+    "harmonic_processing": true
+  }
+}

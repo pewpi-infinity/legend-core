@@ -1,0 +1,56 @@
+{
+  "theme": "electronics",
+  "name": "Electronics Lab",
+  "emoji": "🔌",
+  "version": "1.0.0",
+  "description": "Electronic engineering laboratory with circuits, measurement tools, and signal analysis",
+  
+  "visual": {
+    "primary_color": "#00ff00",
+    "secondary_color": "#0000ff",
+    "accent_color": "#ffff00",
+    "background": "linear-gradient(135deg, #0a1a1a, #1a2e3e, #0a1a2e)",
+    "font_family": "'Consolas', 'Monaco', monospace",
+    "effects": ["oscilloscope_trace", "led_indicators", "circuit_paths"]
+  },
+  
+  "components": {
+    "passive": ["⚡ Resistor", "🔋 Capacitor", "🧲 Inductor", "🔌 Diode"],
+    "active": ["📡 Transistor", "💾 IC Chip", "🔊 Op-Amp", "⚙️ Microcontroller"],
+    "connectors": ["🔌 Wire", "🔗 Jumper", "📍 Pin", "🔌 Connector"],
+    "power": ["🔋 Battery", "⚡ Power Supply", "🔌 Voltage Regulator"]
+  },
+  
+  "measurement_tools": {
+    "scopes": ["📊 Oscilloscope", "📈 Logic Analyzer", "📊 Spectrum Analyzer"],
+    "meters": ["📏 Multimeter", "⚡ Voltmeter", "🔄 Ammeter", "🛑 Ohmmeter"],
+    "generators": ["🌊 Signal Generator", "⏱️ Function Generator", "📡 Pulse Generator"],
+    "analyzers": ["📊 Network Analyzer", "📈 Frequency Counter"]
+  },
+  
+  "workstation": {
+    "equipment": ["🔧 Soldering Iron", "🔥 Hot Air Station", "🔍 Magnifier", "✂️ Wire Cutter"],
+    "boards": ["🟩 Breadboard", "🟨 PCB", "🔷 Perfboard", "Arduino 🤖"],
+    "storage": ["📦 Component Bins", "🗄️ Parts Organizer", "📚 Datasheet Library"]
+  },
+  
+  "concepts": {
+    "fundamentals": ["⚡ Voltage", "🔄 Current", "🛑 Resistance", "⚙️ Power"],
+    "ac_analysis": ["🌊 Frequency", "📊 Amplitude", "🔄 Phase", "⏱️ Period"],
+    "digital": ["0️⃣1️⃣ Binary", "🔢 Logic Gates", "⏱️ Clock", "💾 Memory"],
+    "circuits": ["🔄 Series", "⚡ Parallel", "🔁 Feedback", "🎚️ Filter"]
+  },
+  
+  "projects": {
+    "beginner": ["LED Blinker", "Voltage Divider", "555 Timer"],
+    "intermediate": ["Audio Amplifier", "Power Supply", "PWM Controller"],
+    "advanced": ["RF Transmitter", "FPGA Design", "Signal Processing"]
+  },
+  
+  "legend_integration": {
+    "roles": ["FILTER", "TRANSFORMER", "AMPLIFIER", "OSCILLATOR", "VALIDATOR"],
+    "formulas": ["🔍 Filter → 🔄 Transformer → 📢 Amplifier → 📊 Monitor"],
+    "signal_processing": true,
+    "capacitor_physics": "Core to terminal jump system"
+  }
+}

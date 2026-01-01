@@ -1,0 +1,265 @@
+{
+  "theme_system": {
+    "version": "1.0.0",
+    "total_themes": 11,
+    "categories": ["music", "technical", "creative"],
+    
+    "themes": {
+      "mario_bros": {
+        "id": "mario",
+        "name": "Mario Bros",
+        "emoji": "🍄",
+        "category": "creative",
+        "description": "Classic Mario Bros gaming theme with mushrooms and power-ups",
+        "colors": {
+          "primary": "#ff0000",
+          "secondary": "#00ff00",
+          "accent": "#ffff00",
+          "background": "#5c94fc"
+        },
+        "elements": {
+          "characters": ["Mario 🍄", "Luigi 💚", "Princess Peach 👸🏼", "Toad 🍄"],
+          "items": ["Mushroom 🍄", "Star ⭐", "Coin 💰", "Fire Flower 🌸"],
+          "enemies": ["Goomba", "Koopa 🐢", "Piranha Plant 🌿", "Bowser 🐉"],
+          "blocks": ["? Block 🟨", "Brick 🧱", "Pipe 🟩", "Flag 🚩"]
+        },
+        "sounds": ["jump", "coin", "power_up", "level_complete"],
+        "animations": ["run", "jump", "grow", "star_power"]
+      },
+      
+      "rock_arena": {
+        "id": "rock",
+        "name": "Rock Arena",
+        "emoji": "🎸",
+        "category": "music",
+        "description": "Electric rock concert venue with amplifiers and stage lights",
+        "colors": {
+          "primary": "#ff0000",
+          "secondary": "#000000",
+          "accent": "#ffff00",
+          "background": "#1a1a1a"
+        },
+        "elements": {
+          "instruments": ["Electric Guitar 🎸", "Bass 🎸", "Drums 🥁", "Keyboard 🎹"],
+          "equipment": ["Amplifier 🔊", "Pedal 🎚️", "Microphone 🎤", "Cable 🔌"],
+          "stage": ["Lights 💡", "Speakers 📢", "Stage 🎭", "Crowd 👥"],
+          "effects": ["Distortion", "Reverb", "Delay", "Chorus"]
+        },
+        "genres": ["Hard Rock", "Metal", "Punk", "Alternative"],
+        "atmosphere": "high_energy"
+      },
+      
+      "jazz_club": {
+        "id": "jazz",
+        "name": "Jazz Club",
+        "emoji": "🎷",
+        "category": "music",
+        "description": "Intimate jazz club with smooth sounds and dim lighting",
+        "colors": {
+          "primary": "#d4af37",
+          "secondary": "#2c1810",
+          "accent": "#cd853f",
+          "background": "#1a0f0a"
+        },
+        "elements": {
+          "instruments": ["Saxophone 🎷", "Trumpet 🎺", "Piano 🎹", "Double Bass 🎻"],
+          "venue": ["Bar 🍸", "Stage 🎭", "Tables 🪑", "Lights 💡"],
+          "atmosphere": ["Dim Lights", "Smoke 💨", "Intimate", "Sophisticated"],
+          "styles": ["Bebop", "Swing", "Blues", "Fusion"]
+        },
+        "mood": "smooth",
+        "time": "night"
+      },
+      
+      "edm_arena": {
+        "id": "edm",
+        "name": "EDM Arena",
+        "emoji": "🎧",
+        "category": "music",
+        "description": "Massive electronic dance music venue with lasers and LED walls",
+        "colors": {
+          "primary": "#00ffff",
+          "secondary": "#ff00ff",
+          "accent": "#00ff00",
+          "background": "#000000"
+        },
+        "elements": {
+          "equipment": ["DJ Controller 🎛️", "Mixer 🎚️", "Headphones 🎧", "Turntables 💿"],
+          "visuals": ["Lasers 🔦", "LED Wall 📺", "Strobe Lights ⚡", "Fog Machine 💨"],
+          "effects": ["Bass Drop 💥", "Build Up 📈", "Filter Sweep 🌊", "Sidechain 🔗"],
+          "crowd": ["Jump 🙌", "Hands Up 🙏", "Rave 🎉", "Energy ⚡"]
+        },
+        "genres": ["House", "Techno", "Dubstep", "Trance"],
+        "intensity": "maximum"
+      },
+      
+      "symphony_hall": {
+        "id": "symphony",
+        "name": "Symphony Hall",
+        "emoji": "🎻",
+        "category": "music",
+        "description": "Grand concert hall with orchestral instruments and acoustics",
+        "colors": {
+          "primary": "#8b0000",
+          "secondary": "#ffd700",
+          "accent": "#ffffff",
+          "background": "#2c1810"
+        },
+        "elements": {
+          "instruments": ["Violin 🎻", "Cello 🎻", "Flute 🪈", "French Horn 🎺"],
+          "sections": ["Strings", "Brass", "Woodwinds", "Percussion"],
+          "hall": ["Stage 🎭", "Balcony 🏛️", "Chandelier 💎", "Acoustics 🔊"],
+          "performances": ["Symphony", "Concerto", "Overture", "Suite"]
+        },
+        "formality": "high",
+        "acoustics": "pristine"
+      },
+      
+      "hip_hop_studio": {
+        "id": "hiphop",
+        "name": "Hip-Hop Studio",
+        "emoji": "🎤",
+        "category": "music",
+        "description": "Urban recording studio with beats, rhymes, and production",
+        "colors": {
+          "primary": "#ffff00",
+          "secondary": "#000000",
+          "accent": "#ff0000",
+          "background": "#1a1a1a"
+        },
+        "elements": {
+          "equipment": ["Microphone 🎤", "MPC 🎛️", "Mixer 🎚️", "Monitors 🔊"],
+          "booth": ["Vocal Booth 🎙️", "Control Room 🎛️", "Lounge 🛋️", "Graffiti Wall 🎨"],
+          "production": ["Beats 🥁", "Samples 🎵", "Scratching 💿", "Bass 🔊"],
+          "culture": ["Rhymes 📝", "Flow 🌊", "Cipher 🔄", "Freestyle 🎤"]
+        },
+        "vibe": "urban",
+        "energy": "creative"
+      },
+      
+      "electronics_lab": {
+        "id": "electronics",
+        "name": "Electronics Lab",
+        "emoji": "🔌",
+        "category": "technical",
+        "description": "Electronic engineering lab with circuits and measurement tools",
+        "colors": {
+          "primary": "#00ff00",
+          "secondary": "#0000ff",
+          "accent": "#ffff00",
+          "background": "#1a1a2e"
+        },
+        "elements": {
+          "components": ["Resistor ⚡", "Capacitor 🔋", "Transistor 📡", "IC Chip 💾"],
+          "tools": ["Oscilloscope 📊", "Multimeter 📏", "Signal Generator 🌊", "Soldering Iron 🔥"],
+          "projects": ["Circuit Board 🟩", "Breadboard 🟨", "PCB Design 🗺️", "Prototype 🔧"],
+          "concepts": ["Voltage ⚡", "Current 🔄", "Resistance 🛑", "Frequency 🌊"]
+        },
+        "focus": "hardware",
+        "precision": "high"
+      },
+      
+      "chemistry_lab": {
+        "id": "chemistry",
+        "name": "Chemistry Lab",
+        "emoji": "🧪",
+        "category": "technical",
+        "description": "Chemical laboratory with periodic table and reactions",
+        "colors": {
+          "primary": "#00ffff",
+          "secondary": "#ff00ff",
+          "accent": "#ffff00",
+          "background": "#0a2e3e"
+        },
+        "elements": {
+          "equipment": ["Beaker 🧪", "Flask 🧴", "Burner 🔥", "Test Tube 🧫"],
+          "tools": ["Pipette 💧", "Scale ⚖️", "pH Meter 📊", "Centrifuge 🌀"],
+          "concepts": ["Elements ⚛️", "Compounds 🔗", "Reactions ⚡", "Bonds 🔗"],
+          "safety": ["Goggles 🥽", "Gloves 🧤", "Lab Coat 🥼", "Fume Hood 💨"]
+        },
+        "periodic_table": true,
+        "reactions": ["Acid-Base", "Oxidation", "Synthesis", "Combustion"]
+      },
+      
+      "mathematics": {
+        "id": "math",
+        "name": "Mathematics",
+        "emoji": "📐",
+        "category": "technical",
+        "description": "Mathematical workspace with equations and geometric tools",
+        "colors": {
+          "primary": "#4169e1",
+          "secondary": "#ffd700",
+          "accent": "#ffffff",
+          "background": "#0a1a2e"
+        },
+        "elements": {
+          "tools": ["Ruler 📏", "Compass 🧭", "Protractor 📐", "Calculator 🔢"],
+          "concepts": ["Algebra 𝑥", "Geometry 📐", "Calculus ∫", "Statistics 📊"],
+          "visualizations": ["Graphs 📈", "Charts 📊", "Diagrams 🗺️", "Proofs ✓"],
+          "operations": ["Addition ➕", "Subtraction ➖", "Multiplication ✖️", "Division ➗"]
+        },
+        "branches": ["Arithmetic", "Algebra", "Geometry", "Calculus"],
+        "precision": "exact"
+      },
+      
+      "robotics_workshop": {
+        "id": "robotics",
+        "name": "Robotics Workshop",
+        "emoji": "🤖",
+        "category": "technical",
+        "description": "Robotics engineering workshop with automation and programming",
+        "colors": {
+          "primary": "#ff6600",
+          "secondary": "#333333",
+          "accent": "#00ff00",
+          "background": "#1a1a1a"
+        },
+        "elements": {
+          "robots": ["Humanoid 🤖", "Arm 🦾", "Drone 🚁", "Rover 🚗"],
+          "components": ["Servo 🔄", "Sensor 📡", "Motor ⚙️", "Controller 🎛️"],
+          "programming": ["Code 💻", "Algorithm 🔢", "AI 🧠", "Automation 🔄"],
+          "tools": ["Wrench 🔧", "3D Printer 🖨️", "Soldering Iron 🔥", "Workbench 🔨"]
+        },
+        "capabilities": ["Movement", "Sensing", "Decision Making", "Learning"],
+        "automation": "advanced"
+      },
+      
+      "construction_site": {
+        "id": "construction",
+        "name": "Construction Site",
+        "emoji": "🏗️",
+        "category": "technical",
+        "description": "Construction site with heavy machinery and building plans",
+        "colors": {
+          "primary": "#ffff00",
+          "secondary": "#ff6600",
+          "accent": "#000000",
+          "background": "#8b7355"
+        },
+        "elements": {
+          "machinery": ["Crane 🏗️", "Bulldozer 🚜", "Excavator 🚧", "Dump Truck 🚛"],
+          "tools": ["Hammer 🔨", "Drill 🔩", "Saw 🪚", "Level 📏"],
+          "materials": ["Steel 🔩", "Concrete 🧱", "Wood 🪵", "Glass 🪟"],
+          "plans": ["Blueprint 🗺️", "CAD Design 💻", "Measurements 📏", "Specifications 📋"]
+        },
+        "safety": ["Hard Hat ⛑️", "Vest 🦺", "Boots 🥾", "Caution ⚠️"],
+        "scale": "large"
+      }
+    }
+  },
+  
+  "theme_switching": {
+    "method": "dynamic_css_variables",
+    "user_preference": "localStorage",
+    "default_theme": "mario",
+    "transition": "smooth"
+  },
+  
+  "cross_theme_elements": {
+    "crown_index": "Present in all themes as authority",
+    "memory_node": "Persists across theme switches",
+    "spark_system": "Works identically in all themes",
+    "emoji_language": "Universal semantic layer"
+  }
+}

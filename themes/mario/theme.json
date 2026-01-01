@@ -1,0 +1,52 @@
+{
+  "theme": "mario",
+  "name": "Mario Bros",
+  "emoji": "🍄",
+  "version": "1.0.0",
+  "description": "Classic Mario Bros gaming theme with mushrooms, power-ups, and adventure",
+  
+  "visual": {
+    "primary_color": "#ff0000",
+    "secondary_color": "#00ff00",
+    "accent_color": "#ffff00",
+    "background": "linear-gradient(135deg, #5c94fc, #4a77d4, #3b5998)",
+    "font_family": "'Press Start 2P', 'Courier New', monospace",
+    "block_style": "pixelated"
+  },
+  
+  "characters": {
+    "mario": { "emoji": "🍄", "name": "Mario", "color": "#ff0000" },
+    "luigi": { "emoji": "💚", "name": "Luigi", "color": "#00ff00" },
+    "peach": { "emoji": "👸🏼", "name": "Princess Peach", "color": "#ffb6c1" },
+    "toad": { "emoji": "🍄", "name": "Toad", "color": "#ff0000" },
+    "yoshi": { "emoji": "🦖", "name": "Yoshi", "color": "#00ff00" }
+  },
+  
+  "items": {
+    "power_ups": ["🍄 Mushroom", "⭐ Star", "🌸 Fire Flower", "🍃 Leaf"],
+    "collectibles": ["💰 Coin", "💎 Gem", "🏆 Trophy", "👑 Crown"],
+    "blocks": ["🧱 Brick", "❓ Question Block", "⬜ Metal Block", "☁️ Cloud"]
+  },
+  
+  "enemies": {
+    "common": ["Goomba 🟤", "Koopa 🐢", "Piranha 🌿"],
+    "bosses": ["Bowser 🐉", "Bowser Jr. 🐲"]
+  },
+  
+  "world_elements": {
+    "terrain": ["🟩 Ground", "🟢 Pipe", "🏔️ Hill", "🏰 Castle", "🌉 Bridge"],
+    "sky": ["☁️ Cloud", "☀️ Sun", "🌙 Moon", "⭐ Star"],
+    "water": ["🌊 Wave", "🐟 Fish", "🦑 Blooper"]
+  },
+  
+  "sounds": {
+    "effects": ["jump", "coin", "power_up", "bump", "stomp", "pipe", "fireball"],
+    "music": ["overworld", "underground", "castle", "underwater", "star_power", "victory"]
+  },
+  
+  "legend_integration": {
+    "roles": ["CONTROLLER", "SPARK", "EMITTER", "WEAVER"],
+    "formulas": ["🕹️ Controller → 🦾 Robot → ⚡ Spark → 🟡 Emitter"],
+    "memory_persistence": true
+  }
+}
