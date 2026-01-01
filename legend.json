@@ -1,0 +1,440 @@
+{
+  "spec_version": "1.0.0",
+  "system_name": "INFINITY LEGEND SYSTEM",
+  "tagline": "🧱 Kris 🔑 • 👑📶⚪ • 🛒📶👑",
+  "core_principle": "Declarative, immutable, discoverable semantic operating system where repos recognize and link (don't execute), tokens carry meaning, and everything builds up without destruction",
+  
+  "color_system": {
+    "GREEN": {
+      "symbol": "🟩",
+      "meaning": "Input/Reception",
+      "roles": ["INPUT_RECEIVER", "INTAKE_NODE"]
+    },
+    "ORANGE": {
+      "symbol": "🟧",
+      "meaning": "Processing/Transform",
+      "roles": ["PROCESSOR", "TRANSFORMER"]
+    },
+    "BLUE": {
+      "symbol": "🟦",
+      "meaning": "Logic/Control",
+      "roles": ["ORCHESTRATOR", "CONTROLLER"]
+    },
+    "RED": {
+      "symbol": "🟥",
+      "meaning": "Action/Output",
+      "roles": ["EMITTER", "ACTUATOR"]
+    },
+    "PURPLE": {
+      "symbol": "🟪",
+      "meaning": "Memory/State",
+      "roles": ["MEMORY_NODE", "STATE_KEEPER"]
+    },
+    "YELLOW": {
+      "symbol": "🟨",
+      "meaning": "Connection/Bridge",
+      "roles": ["BRIDGE", "CONNECTOR"]
+    },
+    "PINK": {
+      "symbol": "💗",
+      "meaning": "Heart/Core",
+      "roles": ["HEART_NODE", "CORE_KEEPER"]
+    }
+  },
+
+  "roles": {
+    "ROBOT_CORE": {
+      "symbol": "🦾",
+      "id": "robot_core",
+      "meaning": "Autonomous execution engine, the fundamental robot that processes and acts",
+      "allowed_actions": ["execute", "process", "automate", "run_flows"],
+      "forbidden_actions": ["delete", "destroy", "override"],
+      "outputs": ["execution_results", "process_logs"],
+      "chain_position": "executor",
+      "color": "🟧"
+    },
+    "MEMORY_NODE": {
+      "symbol": "🪐",
+      "id": "memory_node",
+      "meaning": "Persistent storage system, never forgets, only accumulates",
+      "allowed_actions": ["store", "retrieve", "append", "persist"],
+      "forbidden_actions": ["delete", "truncate", "overwrite"],
+      "outputs": ["stored_state", "memory_snapshots"],
+      "chain_position": "storage",
+      "color": "🟪"
+    },
+    "CROWN_INDEX": {
+      "symbol": "👑",
+      "id": "crown_index",
+      "meaning": "Authoritative central index, the sovereign directory of all",
+      "allowed_actions": ["index", "catalog", "map", "reference"],
+      "forbidden_actions": ["execute", "modify_content"],
+      "outputs": ["index_maps", "catalogs"],
+      "chain_position": "authority",
+      "color": "🟨"
+    },
+    "ORCHESTRATOR": {
+      "symbol": "🛒",
+      "id": "orchestrator",
+      "meaning": "High-level coordinator that assembles and directs flows",
+      "allowed_actions": ["coordinate", "assemble", "direct", "compose"],
+      "forbidden_actions": ["execute_directly", "destroy"],
+      "outputs": ["coordination_plans", "assembly_instructions"],
+      "chain_position": "coordinator",
+      "color": "🟦"
+    },
+    "INTAKE_NODE": {
+      "symbol": "📥",
+      "id": "intake_node",
+      "meaning": "Input reception point, accepts and validates incoming data",
+      "allowed_actions": ["receive", "validate", "accept", "queue"],
+      "forbidden_actions": ["reject_permanently", "destroy"],
+      "outputs": ["validated_inputs", "intake_queues"],
+      "chain_position": "input",
+      "color": "🟩"
+    },
+    "EMITTER": {
+      "symbol": "🟡",
+      "id": "emitter",
+      "meaning": "Output generator, creates and broadcasts new content",
+      "allowed_actions": ["emit", "generate", "broadcast", "publish"],
+      "forbidden_actions": ["delete", "retract"],
+      "outputs": ["emitted_content", "broadcasts"],
+      "chain_position": "output",
+      "color": "🟥"
+    },
+    "WEAVER": {
+      "symbol": "🪡",
+      "id": "weaver",
+      "meaning": "Thread connector, weaves new content into existing fabric",
+      "allowed_actions": ["weave", "connect", "thread", "integrate"],
+      "forbidden_actions": ["cut", "sever", "destroy"],
+      "outputs": ["woven_connections", "integrated_fabric"],
+      "chain_position": "integrator",
+      "color": "🟨"
+    },
+    "ASSEMBLER": {
+      "symbol": "🔧",
+      "id": "assembler",
+      "meaning": "Component builder, constructs complex structures from parts",
+      "allowed_actions": ["assemble", "construct", "build", "compose"],
+      "forbidden_actions": ["disassemble", "destroy"],
+      "outputs": ["assembled_structures", "constructs"],
+      "chain_position": "builder",
+      "color": "🟧"
+    },
+    "ROUTER": {
+      "symbol": "🔀",
+      "id": "router",
+      "meaning": "Path director, routes data and requests to appropriate destinations",
+      "allowed_actions": ["route", "direct", "switch", "forward"],
+      "forbidden_actions": ["block_permanently", "destroy"],
+      "outputs": ["routing_decisions", "forwarded_requests"],
+      "chain_position": "director",
+      "color": "🟦"
+    },
+    "SPINE": {
+      "symbol": "🎛️",
+      "id": "spine",
+      "meaning": "Central backbone, core routing and structural support",
+      "allowed_actions": ["support", "route_centrally", "maintain_structure"],
+      "forbidden_actions": ["collapse", "disconnect"],
+      "outputs": ["spine_routes", "structural_support"],
+      "chain_position": "backbone",
+      "color": "🟨"
+    },
+    "FACET": {
+      "symbol": "💎",
+      "id": "facet",
+      "meaning": "Specialized view or aspect, presents specific perspective",
+      "allowed_actions": ["present", "display", "reflect", "show_aspect"],
+      "forbidden_actions": ["distort", "hide_permanently"],
+      "outputs": ["facet_views", "perspectives"],
+      "chain_position": "presenter",
+      "color": "🟦"
+    },
+    "TOKEN": {
+      "symbol": "🎫",
+      "id": "token",
+      "meaning": "Semantic unit carrier, holds meaning and context",
+      "allowed_actions": ["carry_meaning", "represent", "symbolize"],
+      "forbidden_actions": ["lose_meaning", "corrupt"],
+      "outputs": ["semantic_units", "meaning_carriers"],
+      "chain_position": "carrier",
+      "color": "🟨"
+    },
+    "DISK": {
+      "symbol": "📀",
+      "id": "disk",
+      "meaning": "Storage medium, holds data persistently",
+      "allowed_actions": ["store", "persist", "retain"],
+      "forbidden_actions": ["erase", "format_destructively"],
+      "outputs": ["stored_data", "persistent_state"],
+      "chain_position": "storage",
+      "color": "🟪"
+    },
+    "CONTROLLER": {
+      "symbol": "🕹️",
+      "id": "controller",
+      "meaning": "Control interface, enables user interaction and command",
+      "allowed_actions": ["control", "command", "direct", "interface"],
+      "forbidden_actions": ["force_destructive_actions"],
+      "outputs": ["control_commands", "user_directives"],
+      "chain_position": "interface",
+      "color": "🟦"
+    },
+    "GEAR": {
+      "symbol": "⚙️",
+      "id": "gear",
+      "meaning": "Mechanical processor, transforms inputs through fixed logic",
+      "allowed_actions": ["transform", "process_mechanically", "operate"],
+      "forbidden_actions": ["break", "jam"],
+      "outputs": ["transformed_data", "mechanical_results"],
+      "chain_position": "processor",
+      "color": "🟧"
+    },
+    "MAGNET": {
+      "symbol": "🧲",
+      "id": "magnet",
+      "meaning": "Attraction force, pulls related items together",
+      "allowed_actions": ["attract", "pull", "gather", "collect"],
+      "forbidden_actions": ["repel_permanently", "disperse"],
+      "outputs": ["collected_items", "attracted_data"],
+      "chain_position": "collector",
+      "color": "🟩"
+    },
+    "LOOP": {
+      "symbol": "🔁",
+      "id": "loop",
+      "meaning": "Cyclical processor, repeats operations continuously",
+      "allowed_actions": ["iterate", "cycle", "repeat", "loop"],
+      "forbidden_actions": ["break_permanently", "halt"],
+      "outputs": ["loop_iterations", "cyclic_results"],
+      "chain_position": "iterator",
+      "color": "🟧"
+    },
+    "SPARK": {
+      "symbol": "⚡",
+      "id": "spark",
+      "meaning": "Creation impulse, initiates new content and ideas",
+      "allowed_actions": ["create", "initiate", "spark", "ignite"],
+      "forbidden_actions": ["extinguish", "destroy"],
+      "outputs": ["new_content", "sparked_ideas"],
+      "chain_position": "creator",
+      "color": "🟥"
+    },
+    "HEART_NODE": {
+      "symbol": "💗",
+      "id": "heart_node",
+      "meaning": "Emotional core, maintains system vitality and purpose",
+      "allowed_actions": ["pulse", "vitalize", "sustain", "nurture"],
+      "forbidden_actions": ["stop", "drain"],
+      "outputs": ["vital_pulses", "sustenance"],
+      "chain_position": "core",
+      "color": "💗"
+    },
+    "GRAPH": {
+      "symbol": "📊",
+      "id": "graph",
+      "meaning": "Relationship visualizer, shows connections and patterns",
+      "allowed_actions": ["visualize", "map_relationships", "display_patterns"],
+      "forbidden_actions": ["obscure", "hide_connections"],
+      "outputs": ["visual_graphs", "relationship_maps"],
+      "chain_position": "visualizer",
+      "color": "🟨"
+    },
+    "BRIDGE": {
+      "symbol": "🌉",
+      "id": "bridge",
+      "meaning": "Connection enabler, links disparate systems",
+      "allowed_actions": ["connect", "bridge", "link", "unite"],
+      "forbidden_actions": ["disconnect", "isolate"],
+      "outputs": ["connections", "bridges"],
+      "chain_position": "connector",
+      "color": "🟨"
+    },
+    "PORTAL": {
+      "symbol": "🚪",
+      "id": "portal",
+      "meaning": "Entry/exit point, transitions between contexts",
+      "allowed_actions": ["transition", "transport", "portal"],
+      "forbidden_actions": ["lock_permanently", "seal"],
+      "outputs": ["transitions", "portals"],
+      "chain_position": "gateway",
+      "color": "🟨"
+    },
+    "FILTER": {
+      "symbol": "🔍",
+      "id": "filter",
+      "meaning": "Selection mechanism, passes what matches criteria",
+      "allowed_actions": ["filter", "select", "screen", "pass"],
+      "forbidden_actions": ["delete_filtered", "destroy"],
+      "outputs": ["filtered_results", "selections"],
+      "chain_position": "selector",
+      "color": "🟩"
+    },
+    "TRANSFORMER": {
+      "symbol": "🔄",
+      "id": "transformer",
+      "meaning": "Shape changer, converts data between forms",
+      "allowed_actions": ["transform", "convert", "reshape", "adapt"],
+      "forbidden_actions": ["corrupt", "destroy"],
+      "outputs": ["transformed_data", "conversions"],
+      "chain_position": "converter",
+      "color": "🟧"
+    },
+    "BEACON": {
+      "symbol": "💡",
+      "id": "beacon",
+      "meaning": "Signal broadcaster, announces presence and status",
+      "allowed_actions": ["broadcast", "signal", "announce", "beacon"],
+      "forbidden_actions": ["silence_permanently", "hide"],
+      "outputs": ["broadcasts", "signals"],
+      "chain_position": "announcer",
+      "color": "🟥"
+    },
+    "CACHE": {
+      "symbol": "📦",
+      "id": "cache",
+      "meaning": "Quick access storage, temporary but persistent memory",
+      "allowed_actions": ["cache", "store_temporarily", "quick_retrieve"],
+      "forbidden_actions": ["lose_data", "corrupt"],
+      "outputs": ["cached_data", "quick_access"],
+      "chain_position": "fast_storage",
+      "color": "🟪"
+    },
+    "VALIDATOR": {
+      "symbol": "✅",
+      "id": "validator",
+      "meaning": "Quality checker, ensures data meets standards",
+      "allowed_actions": ["validate", "verify", "check", "certify"],
+      "forbidden_actions": ["corrupt", "falsify"],
+      "outputs": ["validation_results", "certifications"],
+      "chain_position": "checker",
+      "color": "🟩"
+    },
+    "AGGREGATOR": {
+      "symbol": "📚",
+      "id": "aggregator",
+      "meaning": "Collection builder, combines multiple items",
+      "allowed_actions": ["aggregate", "combine", "collect", "group"],
+      "forbidden_actions": ["scatter", "destroy"],
+      "outputs": ["aggregated_collections", "combined_data"],
+      "chain_position": "combiner",
+      "color": "🟧"
+    },
+    "DISTRIBUTOR": {
+      "symbol": "📤",
+      "id": "distributor",
+      "meaning": "Multi-target sender, dispatches to many destinations",
+      "allowed_actions": ["distribute", "dispatch", "spread", "disseminate"],
+      "forbidden_actions": ["hoard", "block"],
+      "outputs": ["distributed_content", "dispatches"],
+      "chain_position": "dispatcher",
+      "color": "🟥"
+    },
+    "MONITOR": {
+      "symbol": "👁️",
+      "id": "monitor",
+      "meaning": "Observer and watcher, tracks system state",
+      "allowed_actions": ["observe", "monitor", "watch", "track"],
+      "forbidden_actions": ["blind", "ignore"],
+      "outputs": ["observations", "monitoring_data"],
+      "chain_position": "observer",
+      "color": "🟦"
+    },
+    "SCHEDULER": {
+      "symbol": "⏰",
+      "id": "scheduler",
+      "meaning": "Time coordinator, manages when things happen",
+      "allowed_actions": ["schedule", "time", "sequence", "coordinate_time"],
+      "forbidden_actions": ["skip_permanently", "lose_time"],
+      "outputs": ["schedules", "timed_events"],
+      "chain_position": "timer",
+      "color": "🟦"
+    },
+    "NUCLEUS": {
+      "symbol": "⚛️",
+      "id": "nucleus",
+      "meaning": "Central core, fundamental organizational unit",
+      "allowed_actions": ["centralize", "organize", "core_function"],
+      "forbidden_actions": ["fragment", "dissolve"],
+      "outputs": ["core_organization", "central_state"],
+      "chain_position": "center",
+      "color": "💗"
+    },
+    "AMPLIFIER": {
+      "symbol": "📢",
+      "id": "amplifier",
+      "meaning": "Signal booster, increases strength and reach",
+      "allowed_actions": ["amplify", "boost", "strengthen", "enhance"],
+      "forbidden_actions": ["weaken", "suppress"],
+      "outputs": ["amplified_signals", "boosted_content"],
+      "chain_position": "enhancer",
+      "color": "🟥"
+    }
+  },
+
+  "formulas": {
+    "powerful_orchestrator": {
+      "formula": "🛒📶👑",
+      "meaning": "Orchestrator + Nuances + Powerful Token",
+      "components": ["ORCHESTRATOR", "nuance_processor", "TOKEN"],
+      "result": "High-level coordination with semantic precision"
+    },
+    "robot_disk_controller": {
+      "formula": "🦾-[📀]-🕹️",
+      "meaning": "Robot accesses Disk through Controller",
+      "flow": "ROBOT_CORE → DISK → CONTROLLER",
+      "result": "Controlled data access pattern"
+    },
+    "robot_disk_gear": {
+      "formula": "🦾-[📀]-⚙️",
+      "meaning": "Robot accesses Disk through Gear processing",
+      "flow": "ROBOT_CORE → DISK → GEAR",
+      "result": "Mechanical data transformation"
+    },
+    "crown_router_spine": {
+      "formula": "👑🔀🎛️",
+      "meaning": "Crown Index routes through Spine backbone",
+      "flow": "CROWN_INDEX → ROUTER → SPINE",
+      "result": "Authoritative routing architecture"
+    },
+    "magnet_memory_loop": {
+      "formula": "🧲🪐🔁",
+      "meaning": "Magnet attracts to Memory in continuous Loop",
+      "flow": "MAGNET → MEMORY_NODE → LOOP",
+      "result": "Persistent attraction cycle"
+    },
+    "spark_weaver_emitter": {
+      "formula": "⚡🪡🟡",
+      "meaning": "Spark creates, Weaver connects, Emitter publishes",
+      "flow": "SPARK → WEAVER → EMITTER",
+      "result": "Creation to publication pipeline"
+    }
+  },
+
+  "propagation_rules": {
+    "never_destroy": "All operations are additive only. No deletion, no overwriting.",
+    "always_link": "Every new entity must link to at least one existing entity.",
+    "self_reference": "System must be able to describe itself using its own legend.",
+    "domino_effect": "One spark creates opportunity for next spark. Growth is exponential.",
+    "discoverable": "All entities must be reachable from Crown Index.",
+    "immutable_core": "Legend roles and meanings never change, only extend."
+  },
+
+  "self_propagation": {
+    "method": "github_pages",
+    "mechanism": "Repos become discoverable through GitHub Pages hosting",
+    "token_creation": "Each repo can spawn token repositories with specific roles",
+    "linking": "Meta tags enable automatic role recognition and linking",
+    "growth_pattern": "Repositories recognize each other without execution"
+  },
+
+  "transformation": {
+    "without_termux": "System becomes repos + tokens through GitHub infrastructure",
+    "decentralization": "No central execution required, all via GitHub Pages",
+    "discovery": "Meta tags and legend.json enable automatic classification",
+    "composition": "Repos compose into larger systems through linking"
+  }
+}
