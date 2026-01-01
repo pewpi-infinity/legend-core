@@ -262,8 +262,9 @@ ${newContent}
     const result = { ...obj1 };
     
     for (const key in obj2) {
-      if (obj2.hasOwnProperty(key)) {
-        if (obj2[key] instanceof Object && obj1[key] instanceof Object && !Array.isArray(obj2[key])) {
+      if (Object.prototype.hasOwnProperty.call(obj2, key)) {
+        if (obj2[key] instanceof Object && !Array.isArray(obj2[key]) && 
+            obj1[key] && obj1[key] instanceof Object && !Array.isArray(obj1[key])) {
           result[key] = this.deepMerge(obj1[key], obj2[key]);
         } else {
           result[key] = obj2[key];

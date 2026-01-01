@@ -356,7 +356,7 @@
 
     <!-- Effects Grid -->
     <div class="effects-grid">
-      <div class="glass-card" onclick="activateEffect('particles')">
+      <div class="glass-card" onclick="activateEffect('particles', event)">
         <div class="card-icon">✨</div>
         <div class="card-title">Floating Particles</div>
         <div class="card-description">
@@ -364,7 +364,7 @@
         </div>
       </div>
 
-      <div class="glass-card" onclick="activateEffect('gradients')">
+      <div class="glass-card" onclick="activateEffect('gradients', event)">
         <div class="card-icon">🌈</div>
         <div class="card-title">Dynamic Gradients</div>
         <div class="card-description">
@@ -372,7 +372,7 @@
         </div>
       </div>
 
-      <div class="glass-card" onclick="activateEffect('3d')">
+      <div class="glass-card" onclick="activateEffect('3d', event)">
         <div class="card-icon">🎲</div>
         <div class="card-title">3D Transforms</div>
         <div class="card-description">
@@ -380,7 +380,7 @@
         </div>
       </div>
 
-      <div class="glass-card" onclick="activateEffect('glass')">
+      <div class="glass-card" onclick="activateEffect('glass', event)">
         <div class="card-icon">🪟</div>
         <div class="card-title">Glassmorphism</div>
         <div class="card-description">
@@ -388,7 +388,7 @@
         </div>
       </div>
 
-      <div class="glass-card" onclick="activateEffect('animation')">
+      <div class="glass-card" onclick="activateEffect('animation', event)">
         <div class="card-icon">💫</div>
         <div class="card-title">Smooth Animations</div>
         <div class="card-description">
@@ -396,7 +396,7 @@
         </div>
       </div>
 
-      <div class="glass-card" onclick="activateEffect('confetti')">
+      <div class="glass-card" onclick="activateEffect('confetti', event)">
         <div class="card-icon">🎉</div>
         <div class="card-title">Celebrations</div>
         <div class="card-description">
@@ -560,7 +560,7 @@
       }
     }
 
-    function activateEffect(effect) {
+    function activateEffect(effect, event) {
       console.log('Activating effect:', effect);
       
       if (effect === 'confetti') {
@@ -570,8 +570,7 @@
       }
       
       // Create sparkles at button location
-      const event = window.event;
-      if (event) {
+      if (event && event.clientX !== undefined) {
         GraphicsEngine.createSparkles(event.clientX, event.clientY);
       }
     }

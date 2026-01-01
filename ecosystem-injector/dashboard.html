@@ -462,7 +462,7 @@
         alert('No audit entries yet');
       } else {
         const logText = log.map(entry => 
-          `${entry.timestamp} - ${entry.repo} - ${entry.status}`
+          `${entry.timestamp || 'N/A'} - ${entry.repo || 'Unknown'} - ${entry.status || 'N/A'}`
         ).join('\n');
         alert('Audit Log:\n\n' + logText);
       }

@@ -349,12 +349,12 @@
       </div>
       
       <div class="filter-buttons">
-        <button class="filter-btn active" onclick="setCategory('all')">All</button>
-        <button class="filter-btn" onclick="setCategory('graphics')">🎨 Graphics</button>
-        <button class="filter-btn" onclick="setCategory('audio')">🔊 Audio</button>
-        <button class="filter-btn" onclick="setCategory('tools')">🛠️ Tools</button>
-        <button class="filter-btn" onclick="setCategory('social')">👥 Social</button>
-        <button class="filter-btn" onclick="setCategory('games')">🎮 Games</button>
+        <button class="filter-btn active" onclick="setCategory('all', event)">All</button>
+        <button class="filter-btn" onclick="setCategory('graphics', event)">🎨 Graphics</button>
+        <button class="filter-btn" onclick="setCategory('audio', event)">🔊 Audio</button>
+        <button class="filter-btn" onclick="setCategory('tools', event)">🛠️ Tools</button>
+        <button class="filter-btn" onclick="setCategory('social', event)">👥 Social</button>
+        <button class="filter-btn" onclick="setCategory('games', event)">🎮 Games</button>
       </div>
     </div>
 
@@ -514,14 +514,16 @@
     }
 
     // Set category filter
-    function setCategory(category) {
+    function setCategory(category, event) {
       currentCategory = category;
       
       // Update button states
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
       });
-      event.target.classList.add('active');
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
       
       renderGadgets();
     }
