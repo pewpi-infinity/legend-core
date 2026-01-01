@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="infinity-legend-roles" content="INTAKE_NODE,VALIDATOR,FILTER">
+<meta name="infinity-legend-symbols" content="📥,✅,🔍">
+<title>📥 Intake Node</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #cccccc;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.panel h2 {
+  color: #ffd700;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 5px;
+  padding: 0.75rem;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  min-height: 200px;
+  resize: vertical;
+  white-space: pre-wrap;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.validation-status {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.validation-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.validation-item:last-child {
+  margin-bottom: 0;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.btn {
+  background: #ffd700;
+  color: #0f0c29;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  background: #ffed4e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffd700;
+  border: 2px solid #ffd700;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffd700;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📥 Intake Node</h1>
+    <p class="description">
+      Input reception interface. Accepts and validates incoming content before spark creation.
+      This is the <strong style="color: #00ff00;">GREEN 🟩</strong> layer - the entry point for all new content.
+    </p>
+  </header>
+
+  <div class="panel">
+    <h2>✅ Input Validation</h2>
+    <div class="validation-status" id="validationStatus">
+      <div class="validation-item">
+        <span class="status-icon">⏳</span>
+        <span>Awaiting input...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>📝 Content Input</h2>
+    <form id="intakeForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="Enter content title..." required>
+      </div>
+      
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea id="content" placeholder="Enter your content here..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="roles">Suggested Legend Roles</label>
+        <input type="text" id="roles" placeholder="e.g., SPARK,CREATOR,EMITTER">
+      </div>
+      
+      <div class="actions">
+        <button type="submit" class="btn" id="acceptBtn" disabled>
+          ✅ Accept & Queue
+        </button>
+        <button type="button" class="btn btn-secondary" id="clearBtn">
+          🔄 Clear Form
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="nav-links">
+    <a href="../index.html" class="nav-link">⚡ Spark Index</a>
+    <a href="../../index.html" class="nav-link">👑 Crown Index</a>
+    <a href="./weaver.html" class="nav-link">🪡 Weaver</a>
+    <a href="./emitter.html" class="nav-link">🟡 Emitter</a>
+  </div>
+
+  <footer>
+    <p>📥 Intake Node • Reception & Validation</p>
+    <p style="margin-top: 0.5rem;">Part of the Infinity Legend System v1.0.0</p>
+  </footer>
+</div>
+
+<script>
+const form = document.getElementById('intakeForm');
+const titleInput = document.getElementById('title');
+const contentInput = document.getElementById('content');
+const rolesInput = document.getElementById('roles');
+const acceptBtn = document.getElementById('acceptBtn');
+const clearBtn = document.getElementById('clearBtn');
+const validationStatus = document.getElementById('validationStatus');
+
+// Validation rules
+function validateInput() {
+  const title = titleInput.value.trim();
+  const content = contentInput.value.trim();
+  
+  const validations = [
+    {
+      condition: title.length > 0,
+      icon: title.length > 0 ? '✅' : '⏳',
+      message: title.length > 0 
+        ? `Title present (${title.length} characters)`
+        : 'Title required'
+    },
+    {
+      condition: content.length > 0,
+      icon: content.length > 0 ? '✅' : '⏳',
+      message: content.length > 0
+        ? `Content present (${content.length} characters)`
+        : 'Content required'
+    },
+    {
+      condition: title.length >= 3,
+      icon: title.length >= 3 ? '✅' : title.length > 0 ? '⚠️' : '⏳',
+      message: title.length >= 3
+        ? 'Title length sufficient'
+        : 'Title should be at least 3 characters'
+    },
+    {
+      condition: content.length >= 10,
+      icon: content.length >= 10 ? '✅' : content.length > 0 ? '⚠️' : '⏳',
+      message: content.length >= 10
+        ? 'Content length sufficient'
+        : 'Content should be at least 10 characters'
+    }
+  ];
+  
+  const allValid = validations.every(v => v.condition);
+  
+  // Update validation status display
+  validationStatus.innerHTML = validations.map(v => `
+    <div class="validation-item">
+      <span class="status-icon">${v.icon}</span>
+      <span>${v.message}</span>
+    </div>
+  `).join('');
+  
+  // Enable/disable accept button
+  acceptBtn.disabled = !allValid;
+  
+  return allValid;
+}
+
+// Real-time validation
+titleInput.addEventListener('input', validateInput);
+contentInput.addEventListener('input', validateInput);
+
+// Handle form submission
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  if (!validateInput()) {
+    alert('❌ Validation failed. Please check the requirements.');
+    return;
+  }
+  
+  const intakeData = {
+    title: titleInput.value.trim(),
+    content: contentInput.value.trim(),
+    roles: rolesInput.value.trim().split(',').map(r => r.trim()).filter(r => r),
+    intakeTimestamp: new Date().toISOString(),
+    status: 'accepted'
+  };
+  
+  // Store in sessionStorage for weaver/emitter
+  sessionStorage.setItem('intake_queue', JSON.stringify(intakeData));
+  
+  alert('✅ Content accepted and queued!\n\nProceed to:\n• 🪡 Weaver to connect it\n• 🟡 Emitter to publish it\n• ⚡ Spark Index to create spark directly');
+  
+  // Clear form
+  form.reset();
+  validateInput();
+});
+
+// Clear button
+clearBtn.addEventListener('click', () => {
+  form.reset();
+  validateInput();
+});
+
+// Initialize validation
+validateInput();
+</script>
+</body>
+</html>

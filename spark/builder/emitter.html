@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="infinity-legend-roles" content="EMITTER,BEACON,PUBLISHER">
+<meta name="infinity-legend-symbols" content="🟡,💡,📤">
+<title>🟡 Emitter</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #cccccc;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.panel h2 {
+  color: #ffd700;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.preview-box {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.preview-title {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.preview-content {
+  color: #cccccc;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.preview-meta {
+  color: #999;
+  font-size: 0.85rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.role-badge {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.connection-list {
+  margin-top: 0.5rem;
+}
+
+.connection-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.empty-preview {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.btn {
+  background: #ffd700;
+  color: #0f0c29;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  background: #ffed4e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffd700;
+  border: 2px solid #ffd700;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.success-message {
+  background: rgba(0, 255, 0, 0.1);
+  border: 2px solid #00ff00;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.success-message h3 {
+  color: #00ff00;
+  margin-bottom: 0.5rem;
+}
+
+.success-message.show {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffd700;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🟡 Emitter</h1>
+    <p class="description">
+      Final emission stage. Publishes content as permanent spark pages. Once emitted, sparks
+      become immutable and eternal. This is the <strong style="color: #ff0000;">RED 🟥</strong> layer - the publication point.
+    </p>
+  </header>
+
+  <div class="success-message" id="successMessage">
+    <h3>✨ Spark Successfully Emitted!</h3>
+    <p id="successDetails"></p>
+  </div>
+
+  <div class="panel">
+    <h2>👁️ Preview</h2>
+    <div id="previewDisplay">
+      <div class="empty-preview">
+        No content ready for emission. Complete the intake and weaver stages first.
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🟡 Emission Control</h2>
+    <div class="actions">
+      <button class="btn" id="emitBtn" disabled>
+        🟡 Emit Spark
+      </button>
+      <button class="btn btn-secondary" id="clearBtn">
+        🔄 Clear Queue
+      </button>
+    </div>
+    <p style="color: #999; margin-top: 1rem; font-size: 0.9rem;">
+      ⚠️ Once emitted, the spark becomes permanent and immutable. This action cannot be undone.
+    </p>
+  </div>
+
+  <div class="nav-links">
+    <a href="../index.html" class="nav-link">⚡ Spark Index</a>
+    <a href="../../index.html" class="nav-link">👑 Crown Index</a>
+    <a href="./intake.html" class="nav-link">📥 Intake Node</a>
+    <a href="./weaver.html" class="nav-link">🪡 Weaver</a>
+  </div>
+
+  <footer>
+    <p>🟡 Emitter • Publish & Preserve</p>
+    <p style="margin-top: 0.5rem;">Part of the Infinity Legend System v1.0.0</p>
+  </footer>
+</div>
+
+<script>
+const STORAGE_KEY = 'infinity_legend_sparks';
+
+// Load spark state
+function loadState() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (e) {
+      console.error('Error parsing stored state:', e);
+    }
+  }
+  return { sparks: [], connections: [], nextId: 1 };
+}
+
+// Save state
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// Load intake queue
+function loadQueue() {
+  const queue = sessionStorage.getItem('intake_queue');
+  if (queue) {
+    try {
+      return JSON.parse(queue);
+    } catch (e) {
+      console.error('Error parsing queue:', e);
+    }
+  }
+  return null;
+}
+
+// Display preview
+function displayPreview() {
+  const previewDisplay = document.getElementById('previewDisplay');
+  const emitBtn = document.getElementById('emitBtn');
+  const queueData = loadQueue();
+  
+  if (!queueData) {
+    previewDisplay.innerHTML = '<div class="empty-preview">No content ready for emission. Complete the intake and weaver stages first.</div>';
+    emitBtn.disabled = true;
+    return;
+  }
+  
+  const state = loadState();
+  const connections = queueData.connections || [];
+  const connectedSparks = state.sparks.filter(s => connections.includes(s.id));
+  
+  const rolesHtml = queueData.roles.length > 0
+    ? `<div class="preview-roles">${queueData.roles.map(r => `<span class="role-badge">${r}</span>`).join('')}</div>`
+    : '';
+  
+  const connectionsHtml = connectedSparks.length > 0
+    ? `
+      <div style="margin-top: 1rem;">
+        <strong>Connections (${connectedSparks.length}):</strong>
+        <div class="connection-list">
+          ${connectedSparks.map(s => `
+            <div class="connection-item">⚡ ${s.id}: ${s.title}</div>
+          `).join('')}
+        </div>
+      </div>
+    `
+    : '';
+  
+  previewDisplay.innerHTML = `
+    <div class="preview-box">
+      <div class="preview-title">${queueData.title}</div>
+      <div class="preview-content">${queueData.content}</div>
+      ${rolesHtml}
+      <div class="preview-meta">
+        Queued: ${new Date(queueData.intakeTimestamp).toLocaleString()}<br>
+        Status: Ready for emission
+        ${connectionsHtml}
+      </div>
+    </div>
+  `;
+  
+  emitBtn.disabled = false;
+}
+
+// Generate spark HTML
+function generateSparkHTML(spark) {
+  const state = loadState();
+  const connectedSparks = state.sparks.filter(s => 
+    spark.connections.includes(s.id)
+  );
+  
+  const connectionsHTML = connectedSparks.length > 0
+    ? `
+      <div class="connections">
+        <h2>🔗 Connected Sparks</h2>
+        ${connectedSparks.map(s => `
+          <div class="connection-item">
+            <strong>${s.icon} ${s.id}:</strong> ${s.title}
+          </div>
+        `).join('')}
+      </div>
+    `
+    : '';
+  
+  const rolesHTML = spark.roles.length > 0
+    ? `<div class="roles">${spark.roles.map(r => `<span class="role-badge">${r}</span>`).join('')}</div>`
+    : '';
+  
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="infinity-legend-roles" content="${spark.roles.join(',')}">
+<meta name="spark-id" content="${spark.id}">
+<meta name="spark-timestamp" content="${spark.timestamp}">
+<title>${spark.icon} ${spark.title}</title>
+<style>
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 2rem;
+  line-height: 1.6;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+h1 {
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+.meta {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+.content {
+  white-space: pre-wrap;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 2rem;
+}
+.roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.role-badge {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+.connections {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+}
+.connections h2 {
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+.connection-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 0.5rem;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 2px solid #ffd700;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.back-link:hover {
+  background: #ffd700;
+  color: #0f0c29;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>${spark.icon} ${spark.title}</h1>
+  <div class="meta">
+    <strong>Spark ID:</strong> ${spark.id}<br>
+    <strong>Created:</strong> ${new Date(spark.timestamp).toLocaleString()}<br>
+    <strong>Part of:</strong> Infinity Legend System v1.0.0
+  </div>
+  ${rolesHTML}
+  <div class="content">${spark.content}</div>
+  ${connectionsHTML}
+  <a href="../index.html" class="back-link">← Back to Spark Index</a>
+</div>
+</body>
+</html>`;
+}
+
+// Emit spark
+document.getElementById('emitBtn').addEventListener('click', () => {
+  const queueData = loadQueue();
+  
+  if (!queueData) {
+    alert('❌ No content to emit!');
+    return;
+  }
+  
+  const state = loadState();
+  
+  // Create spark object
+  const spark = {
+    id: `spark_${String(state.nextId).padStart(3, '0')}`,
+    title: queueData.title,
+    content: queueData.content,
+    roles: queueData.roles,
+    connections: queueData.connections || [],
+    timestamp: new Date().toISOString(),
+    icon: '⚡'
+  };
+  
+  // Add to state
+  state.sparks.push(spark);
+  state.nextId++;
+  
+  // Add connection records
+  spark.connections.forEach(connId => {
+    state.connections.push({
+      from: spark.id,
+      to: connId,
+      created: new Date().toISOString()
+    });
+  });
+  
+  // Save state
+  saveState(state);
+  
+  // Generate HTML
+  const html = generateSparkHTML(spark);
+  
+  // Create blob and download
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${spark.id}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  // Show success message
+  const successMessage = document.getElementById('successMessage');
+  const successDetails = document.getElementById('successDetails');
+  successDetails.innerHTML = `
+    <strong>Spark ID:</strong> ${spark.id}<br>
+    <strong>File:</strong> ${spark.id}.html<br>
+    <strong>Save to:</strong> /spark/sparks/<br><br>
+    The spark has been emitted and preserved forever! ⚡
+  `;
+  successMessage.classList.add('show');
+  
+  // Clear queue
+  sessionStorage.removeItem('intake_queue');
+  
+  // Update display
+  displayPreview();
+  
+  // Hide success message after 10 seconds
+  setTimeout(() => {
+    successMessage.classList.remove('show');
+  }, 10000);
+});
+
+// Clear queue
+document.getElementById('clearBtn').addEventListener('click', () => {
+  if (confirm('Are you sure you want to clear the queue? This will discard the queued content.')) {
+    sessionStorage.removeItem('intake_queue');
+    displayPreview();
+    alert('Queue cleared.');
+  }
+});
+
+// Initialize
+displayPreview();
+</script>
+</body>
+</html>
