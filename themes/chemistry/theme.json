@@ -1,0 +1,76 @@
+{
+  "theme": "chemistry",
+  "name": "Chemistry Lab",
+  "emoji": "🧪",
+  "version": "1.0.0",
+  "description": "Chemical laboratory with periodic table, reactions, and molecular science",
+  
+  "visual": {
+    "primary_color": "#00ffff",
+    "secondary_color": "#ff00ff",
+    "accent_color": "#ffff00",
+    "background": "linear-gradient(135deg, #0a1e2e, #1a3e4e, #0a2e3e)",
+    "font_family": "'Consolas', 'Monaco', monospace",
+    "effects": ["bubbling", "color_changes", "vapor"]
+  },
+  
+  "glassware": {
+    "containers": ["🧪 Beaker", "🧴 Flask", "🧫 Test Tube", "⚗️ Erlenmeyer"],
+    "measurement": ["💧 Pipette", "🧪 Burette", "🥄 Spatula", "📏 Graduated Cylinder"],
+    "specialized": ["⚗️ Distillation", "🌀 Separatory Funnel", "🧲 Crucible"]
+  },
+  
+  "equipment": {
+    "heating": ["🔥 Bunsen Burner", "🔥 Hot Plate", "🌡️ Heating Mantle"],
+    "mixing": ["🌀 Stirrer", "🔄 Shaker", "🌪️ Vortex Mixer"],
+    "separation": ["🌀 Centrifuge", "📊 Chromatography", "⚗️ Distiller"],
+    "analysis": ["📊 pH Meter", "⚖️ Analytical Balance", "🔬 Spectrophotometer"]
+  },
+  
+  "periodic_table": {
+    "groups": {
+      "alkali_metals": "Li Na K Rb Cs Fr",
+      "halogens": "F Cl Br I At",
+      "noble_gases": "He Ne Ar Kr Xe Rn",
+      "transition_metals": "Fe Cu Ag Au Pt"
+    },
+    "categories": ["⚛️ Metals", "⚛️ Nonmetals", "⚛️ Metalloids", "⚛️ Noble Gases"]
+  },
+  
+  "reactions": {
+    "types": [
+      "⚡ Synthesis (A + B → AB)",
+      "💥 Decomposition (AB → A + B)",
+      "🔄 Single Replacement (A + BC → AC + B)",
+      "🔄 Double Replacement (AB + CD → AD + CB)",
+      "🔥 Combustion (Fuel + O₂ → CO₂ + H₂O)"
+    ],
+    "indicators": ["Color Change 🌈", "Gas Evolution 💨", "Precipitate ⬇️", "Temperature Change 🌡️"]
+  },
+  
+  "concepts": {
+    "structure": ["⚛️ Atoms", "🔗 Molecules", "🔗 Bonds", "⚛️ Ions"],
+    "states": ["🧊 Solid", "💧 Liquid", "💨 Gas", "⚡ Plasma"],
+    "properties": ["🌡️ Temperature", "🔋 pH", "⚖️ Mass", "🔊 Concentration"],
+    "kinetics": ["⏱️ Rate", "⚡ Activation Energy", "⚖️ Equilibrium"]
+  },
+  
+  "safety": {
+    "ppe": ["🥽 Safety Goggles", "🧤 Gloves", "🥼 Lab Coat", "👟 Closed-Toe Shoes"],
+    "equipment": ["🚿 Eye Wash", "🚿 Safety Shower", "💨 Fume Hood", "🧯 Fire Extinguisher"],
+    "protocols": ["⚠️ MSDS", "☣️ Hazard Labels", "♻️ Waste Disposal"]
+  },
+  
+  "experiments": {
+    "acid_base": ["Titration", "pH Indicators", "Buffer Solutions"],
+    "redox": ["Electrochemistry", "Galvanic Cells", "Corrosion"],
+    "organic": ["Synthesis", "Chromatography", "Distillation"],
+    "analytical": ["Spectroscopy", "Mass Spec", "NMR"]
+  },
+  
+  "legend_integration": {
+    "roles": ["TRANSFORMER", "REACTOR", "AGGREGATOR", "VALIDATOR", "MONITOR"],
+    "formulas": ["📥 Intake → 🔄 Transformer → ⚡ Reactor → ✅ Validator"],
+    "reaction_engine": true
+  }
+}

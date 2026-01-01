@@ -1,0 +1,55 @@
+{
+  "theme": "jazz",
+  "name": "Jazz Club",
+  "emoji": "🎷",
+  "version": "1.0.0",
+  "description": "Intimate jazz club with smooth sounds, dim lighting, and sophisticated atmosphere",
+  
+  "visual": {
+    "primary_color": "#d4af37",
+    "secondary_color": "#2c1810",
+    "accent_color": "#cd853f",
+    "background": "linear-gradient(135deg, #1a0f0a, #2c1810, #3d2314)",
+    "font_family": "'Brush Script MT', 'Lucida Handwriting', cursive",
+    "effects": ["dim_lights", "smoke", "candlelight"]
+  },
+  
+  "instruments": {
+    "horns": ["🎷 Saxophone", "🎺 Trumpet", "🎺 Trombone"],
+    "rhythm": ["🎹 Piano", "🎻 Double Bass", "🥁 Brushes"],
+    "strings": ["🎸 Jazz Guitar"],
+    "vocals": ["🎤 Microphone", "🎶 Vocal"]
+  },
+  
+  "venue": {
+    "seating": ["🪑 Tables", "🛋️ Lounge", "🪑 Bar Stools", "🎭 Stage"],
+    "bar": ["🍸 Cocktails", "🥃 Whiskey", "🍷 Wine", "☕ Coffee"],
+    "ambiance": ["💡 Dim Lights", "🕯️ Candles", "💨 Smoke", "🖼️ Art"]
+  },
+  
+  "styles": {
+    "classic": ["Bebop", "Swing", "Dixieland"],
+    "modern": ["Cool Jazz", "Modal Jazz", "Free Jazz"],
+    "fusion": ["Jazz Fusion", "Smooth Jazz", "Latin Jazz"]
+  },
+  
+  "performance": {
+    "structure": ["Head", "Solos", "Trading Fours", "Head Out"],
+    "improvisation": true,
+    "swing_feel": "triplet",
+    "tempo_range": "60-240 BPM"
+  },
+  
+  "atmosphere": {
+    "mood": "sophisticated",
+    "volume": "conversational",
+    "dress_code": "smart casual",
+    "time": "evening/night"
+  },
+  
+  "legend_integration": {
+    "roles": ["WEAVER", "TRANSFORMER", "EMITTER", "HEART_NODE"],
+    "formulas": ["🎷 Input → 🪡 Weaver → 🔄 Transformer → 🟡 Emitter"],
+    "improvisation_engine": true
+  }
+}

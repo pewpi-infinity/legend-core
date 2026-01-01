@@ -1,0 +1,50 @@
+{
+  "theme": "rock",
+  "name": "Rock Arena",
+  "emoji": "🎸",
+  "version": "1.0.0",
+  "description": "Electric rock concert venue with amplifiers, stage lights, and high energy",
+  
+  "visual": {
+    "primary_color": "#ff0000",
+    "secondary_color": "#000000",
+    "accent_color": "#ffff00",
+    "background": "linear-gradient(135deg, #1a1a1a, #2d2d2d, #3a3a3a)",
+    "font_family": "'Rock Salt', 'Impact', sans-serif",
+    "effects": ["strobe_lights", "smoke", "fire"]
+  },
+  
+  "instruments": {
+    "strings": ["🎸 Electric Guitar", "🎸 Bass Guitar", "🎻 Violin (Rock)"],
+    "percussion": ["🥁 Drum Kit", "🥁 Cymbals", "🔔 Cowbell"],
+    "keys": ["🎹 Keyboard", "🎹 Synthesizer"],
+    "vocals": ["🎤 Microphone", "📢 Megaphone"]
+  },
+  
+  "equipment": {
+    "amplification": ["🔊 Marshall Stack", "🔊 Mesa Boogie", "📢 PA System"],
+    "effects": ["🎚️ Distortion Pedal", "🎚️ Delay Pedal", "🎚️ Wah Pedal", "🎚️ Reverb"],
+    "cables": ["🔌 1/4 inch", "🔌 XLR", "🔌 Speaker Cable"]
+  },
+  
+  "stage_setup": {
+    "lighting": ["💡 Spotlights", "💡 LED Par Cans", "⚡ Strobe Lights", "🔦 Lasers"],
+    "stage": ["🎭 Main Stage", "🎛️ Mixing Board", "📺 Video Wall", "💨 Smoke Machine"],
+    "crowd": ["👥 Mosh Pit", "👥 Standing Room", "👥 Balcony", "🙌 Crowd Surf"]
+  },
+  
+  "genres": ["Hard Rock", "Heavy Metal", "Punk Rock", "Alternative Rock", "Grunge"],
+  
+  "atmosphere": {
+    "energy": "maximum",
+    "volume": "11",
+    "crowd_response": "headbanging",
+    "temperature": "hot"
+  },
+  
+  "legend_integration": {
+    "roles": ["AMPLIFIER", "EMITTER", "BEACON", "ORCHESTRATOR"],
+    "formulas": ["🎸 Input → 🔊 Amplifier → 📢 Emitter → 👥 Crowd"],
+    "audio_processing": true
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "theme": "edm",
+  "name": "EDM Arena",
+  "emoji": "🎧",
+  "version": "1.0.0",
+  "description": "Massive electronic dance music venue with lasers, LED walls, and maximum energy",
+  
+  "visual": {
+    "primary_color": "#00ffff",
+    "secondary_color": "#ff00ff",
+    "accent_color": "#00ff00",
+    "background": "linear-gradient(135deg, #000000, #1a001a, #001a1a)",
+    "font_family": "'Orbitron', 'Audiowide', sans-serif",
+    "effects": ["lasers", "led_walls", "strobes", "fog"]
+  },
+  
+  "equipment": {
+    "dj_gear": ["🎛️ DJ Controller", "🎚️ Mixer", "🎧 Headphones", "💿 CDJ", "💻 Laptop"],
+    "production": ["🎹 MIDI Controller", "🔊 Monitors", "🎚️ Audio Interface"],
+    "effects": ["🌊 Filter", "⚡ Sidechain", "🔁 Loop", "💥 Sample Trigger"]
+  },
+  
+  "visuals": {
+    "lighting": ["🔦 Lasers", "💡 LED Par", "⚡ Strobe", "🌈 RGB Wash"],
+    "screens": ["📺 LED Wall", "🖥️ VJ Screen", "📽️ Projectors"],
+    "effects": ["💨 Fog Machine", "🎆 Pyro", "🎊 Confetti Cannon", "💧 CO2 Jets"]
+  },
+  
+  "genres": ["House", "Techno", "Dubstep", "Trance", "Drum & Bass", "Future Bass"],
+  
+  "song_structure": {
+    "intro": "8-16 bars",
+    "build_up": "16-32 bars",
+    "drop": "16-32 bars",
+    "breakdown": "16-32 bars",
+    "outro": "8-16 bars"
+  },
+  
+  "crowd_interaction": {
+    "energy": "maximum",
+    "movement": ["🙌 Hands Up", "💃 Dance", "🎉 Jump", "👥 Crowd Wave"],
+    "light_shows": true,
+    "bass_impact": "physical"
+  },
+  
+  "legend_integration": {
+    "roles": ["AMPLIFIER", "LOOP", "TRANSFORMER", "EMITTER", "BEACON"],
+    "formulas": ["🎛️ Controller → 🔁 Loop → 🔄 Transformer → 📢 Amplifier → 🟡 Emitter"],
+    "real_time_processing": true
+  }
+}

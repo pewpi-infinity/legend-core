@@ -1,0 +1,72 @@
+{
+  "theme": "math",
+  "name": "Mathematics",
+  "emoji": "📐",
+  "version": "1.0.0",
+  "description": "Mathematical workspace with equations, geometric tools, and computational precision",
+  
+  "visual": {
+    "primary_color": "#4169e1",
+    "secondary_color": "#ffd700",
+    "accent_color": "#ffffff",
+    "background": "linear-gradient(135deg, #0a1a2e, #1a2a4e, #0a1a3e)",
+    "font_family": "'Computer Modern', 'Times New Roman', serif",
+    "effects": ["graph_grid", "equation_flow", "geometric_patterns"]
+  },
+  
+  "tools": {
+    "geometric": ["📏 Ruler", "🧭 Compass", "📐 Protractor", "📏 Set Square"],
+    "computational": ["🔢 Calculator", "💻 Computer", "📊 Graphing Calculator"],
+    "drawing": ["✏️ Pencil", "🖊️ Pen", "🖍️ Colored Pencils", "📝 Graph Paper"]
+  },
+  
+  "branches": {
+    "arithmetic": {
+      "operations": ["➕ Addition", "➖ Subtraction", "✖️ Multiplication", "➗ Division"],
+      "concepts": ["🔢 Numbers", "➗ Fractions", "📊 Decimals", "📈 Percentages"]
+    },
+    "algebra": {
+      "topics": ["𝑥 Variables", "📊 Equations", "📈 Functions", "🔄 Systems"],
+      "symbols": ["𝑥 𝑦 𝑧", "𝑎 𝑏 𝑐", "α β γ", "∑ ∏ ∫"]
+    },
+    "geometry": {
+      "shapes": ["△ Triangle", "□ Square", "○ Circle", "⬡ Hexagon"],
+      "concepts": ["📏 Length", "📐 Angle", "📊 Area", "📦 Volume"],
+      "transformations": ["↻ Rotation", "↔️ Translation", "⇄ Reflection", "↕️ Scaling"]
+    },
+    "calculus": {
+      "differential": ["d/dx Derivative", "∂ Partial", "∇ Gradient"],
+      "integral": ["∫ Integral", "∬ Double Integral", "∮ Contour"],
+      "concepts": ["📈 Limits", "📊 Continuity", "🌊 Series", "⚡ Rates"]
+    },
+    "statistics": {
+      "measures": ["μ Mean", "σ Standard Deviation", "📊 Median", "📈 Mode"],
+      "distributions": ["📊 Normal", "📈 Binomial", "📊 Poisson"],
+      "inference": ["🎲 Probability", "📊 Hypothesis Testing", "📈 Confidence Intervals"]
+    }
+  },
+  
+  "visualizations": {
+    "graphs": ["📈 Line Graph", "📊 Bar Chart", "🥧 Pie Chart", "📉 Scatter Plot"],
+    "plots": ["🗺️ Coordinate Plane", "📊 3D Plot", "🌊 Vector Field", "🎨 Heatmap"],
+    "diagrams": ["🌳 Tree Diagram", "📊 Venn Diagram", "🗺️ Flow Chart"]
+  },
+  
+  "problem_solving": {
+    "steps": ["1️⃣ Understand", "2️⃣ Plan", "3️⃣ Execute", "4️⃣ Verify"],
+    "strategies": ["🔍 Pattern Recognition", "🔄 Working Backwards", "📊 Trial and Error", "🎯 Divide and Conquer"],
+    "verification": ["✓ Check Answer", "📊 Test Cases", "📐 Dimensional Analysis"]
+  },
+  
+  "special_numbers": {
+    "constants": ["π (Pi) ≈ 3.14159", "𝑒 (Euler) ≈ 2.71828", "φ (Phi) ≈ 1.61803", "√2 ≈ 1.41421"],
+    "sets": ["ℕ Natural", "ℤ Integer", "ℚ Rational", "ℝ Real", "ℂ Complex"]
+  },
+  
+  "legend_integration": {
+    "roles": ["CALCULATOR", "VALIDATOR", "TRANSFORMER", "GRAPH", "PROCESSOR"],
+    "formulas": ["📥 Input → ⚙️ Processor → 📊 Graph → ✅ Validator"],
+    "equation_solver": true,
+    "precision": "exact"
+  }
+}

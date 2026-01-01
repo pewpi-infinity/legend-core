@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="infinity-legend-version" content="1.0.0">
+    <meta name="infinity-legend-roles" content="CONTROLLER,EMITTER,ROBOT_CORE">
+    <meta name="infinity-legend-symbols" content="🕹️,🟡,🦾">
+    <title>🍄 MRW Animated Terminal - Legend Core</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #5c94fc, #4a77d4, #3b5998);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: shimmer 2s infinite;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+        
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 400px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .terminal-screen {
+            font-size: 16px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            height: 400px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .game-canvas {
+            width: 100%;
+            height: 300px;
+            background: #000;
+            border: 2px solid #333;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character {
+            position: absolute;
+            font-size: 24px;
+            transition: transform 0.1s;
+            z-index: 10;
+        }
+        
+        .vehicle {
+            position: absolute;
+            font-size: 24px;
+            z-index: 5;
+        }
+        
+        .item {
+            position: absolute;
+            font-size: 20px;
+            animation: spin 2s infinite linear;
+        }
+        
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, #00aa00, #008800);
+            border-top: 3px solid #00ff00;
+        }
+        
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, #5c94fc, transparent);
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .control-group {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .control-group h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.5);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .joystick {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 5px;
+            margin: 10px auto;
+            width: fit-content;
+        }
+        
+        .joystick button {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            padding: 0;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700; }
+            50% { text-shadow: 0 0 20px #ffd700, 0 0 40px #ffed4e; }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .terminal-output {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-left: 3px solid #ffd700;
+            padding-left: 10px;
+        }
+        
+        .command-line {
+            color: #ffd700;
+            margin-top: 10px;
+        }
+        
+        .prompt {
+            color: #ff0000;
+            font-weight: bold;
+        }
+        
+        .legend-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            max-width: 300px;
+            font-size: 0.9em;
+        }
+        
+        .legend-info h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍄 MRW Animated Terminal 🍄</h1>
+            <p>🕹️ Mario & Luigi • Capacitor-Resistor Physics • 🏎️ Cars & Karts</p>
+        </div>
+        
+        <div class="terminal">
+            <div class="game-canvas" id="gameCanvas">
+                <div class="sky"></div>
+                <div class="ground"></div>
+            </div>
+            
+            <div class="terminal-screen" id="terminalOutput">
+                <div class="terminal-output">
+                    <span class="prompt">🍄 MRW Terminal v1.0.0</span>
+                </div>
+                <div class="terminal-output">
+                    🎮 Infinity Legend System - CONTROLLER + ROBOT_CORE + EMITTER
+                </div>
+                <div class="terminal-output">
+                    ⚡ Capacitor-Resistor Jump Physics Active
+                </div>
+                <div class="terminal-output">
+                    🏰 Crown Index: Legend Core Authority
+                </div>
+                <div class="command-line">
+                    <span class="prompt">mario@legend-core:~$</span> <span id="commandInput">Type 'help' for commands...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h3>🕹️ Joystick Control</h3>
+                <div class="joystick">
+                    <button onclick="terminal.handleControl('up-left')">↖️</button>
+                    <button onclick="terminal.handleControl('up')">⬆️</button>
+                    <button onclick="terminal.handleControl('up-right')">↗️</button>
+                    <button onclick="terminal.handleControl('left')">⬅️</button>
+                    <button onclick="terminal.handleControl('neutral')">⏸️</button>
+                    <button onclick="terminal.handleControl('right')">➡️</button>
+                    <button onclick="terminal.handleControl('down-left')">↙️</button>
+                    <button onclick="terminal.handleControl('down')">⬇️</button>
+                    <button onclick="terminal.handleControl('down-right')">↘️</button>
+                </div>
+                <button onclick="terminal.handleControl('jump')">🔼 Jump (Space)</button>
+                <button onclick="terminal.handleControl('run')">🏃 Run (Shift)</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>👥 Characters</h3>
+                <button onclick="terminal.spawnCharacter('mario')">🍄 Spawn Mario</button>
+                <button onclick="terminal.spawnCharacter('luigi')">💚 Spawn Luigi</button>
+                <button onclick="terminal.toggleCharacter()">🔄 Switch Character</button>
+                <button onclick="terminal.makeSpeak()">💬 Speak</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>🚗 Vehicles</h3>
+                <button onclick="terminal.spawnVehicle('kart')">🏎️ Spawn Kart</button>
+                <button onclick="terminal.spawnVehicle('pipe')">🚂 Pipe Cart</button>
+                <button onclick="terminal.enterVehicle()">🎮 Enter Vehicle</button>
+            </div>
+            
+            <div class="control-group">
+                <h3>⭐ Items & Power-ups</h3>
+                <button onclick="terminal.spawnItem('mushroom')">🍄 Mushroom</button>
+                <button onclick="terminal.spawnItem('star')">⭐ Star</button>
+                <button onclick="terminal.spawnItem('coin')">💰 Coin</button>
+                <button onclick="terminal.spawnItem('fire')">🌸 Fire Flower</button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="coinCount">0</div>
+                <div class="stat-label">💰 Coins</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="jumpCount">0</div>
+                <div class="stat-label">🔼 Jumps</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="powerUpCount">0</div>
+                <div class="stat-label">⭐ Power-Ups</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="distance">0</div>
+                <div class="stat-label">📏 Distance</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="legend-info">
+        <h4>🧱Kris🔑 Token System</h4>
+        <p>👑📶⚪ Powerful Orchestrator</p>
+        <p>🕹️📀🦾 Controller-Disk-Robot</p>
+        <p>⚡🪡🟡 Spark-Weaver-Emitter</p>
+        <p>🧲🪐🔁 Magnet-Memory-Loop</p>
+        <br>
+        <p style="font-size: 0.8em;">⚡ RC Physics: Capacitor jump charge with exponential discharge</p>
+    </div>
+    
+    <script src="characters.js"></script>
+    <script src="physics.js"></script>
+    <script>
+        class MRWTerminal {
+            constructor() {
+                this.canvas = document.getElementById('gameCanvas');
+                this.output = document.getElementById('terminalOutput');
+                this.physics = new PhysicsEngine();
+                
+                this.characters = [];
+                this.vehicles = [];
+                this.items = [];
+                this.activeCharacter = null;
+                
+                this.stats = {
+                    coins: 0,
+                    jumps: 0,
+                    powerUps: 0,
+                    distance: 0
+                };
+                
+                this.inputs = {
+                    left: false,
+                    right: false,
+                    jump: false,
+                    run: false,
+                    down: false
+                };
+                
+                this.groundY = 260;
+                this.running = false;
+                
+                this.setupKeyboard();
+                this.log("🍄 MRW Terminal initialized with Capacitor-Resistor physics!");
+                this.log("🎮 Use arrow keys to move, Space to jump, Shift to run");
+                
+                this.startGameLoop();
+            }
+            
+            setupKeyboard() {
+                document.addEventListener('keydown', (e) => {
+                    switch(e.key) {
+                        case 'ArrowLeft': this.inputs.left = true; break;
+                        case 'ArrowRight': this.inputs.right = true; break;
+                        case 'ArrowUp':
+                        case ' ': this.inputs.jump = true; e.preventDefault(); break;
+                        case 'ArrowDown': this.inputs.down = true; break;
+                        case 'Shift': this.inputs.run = true; break;
+                    }
+                });
+                
+                document.addEventListener('keyup', (e) => {
+                    switch(e.key) {
+                        case 'ArrowLeft': this.inputs.left = false; break;
+                        case 'ArrowRight': this.inputs.right = false; break;
+                        case 'ArrowUp':
+                        case ' ': this.inputs.jump = false; break;
+                        case 'ArrowDown': this.inputs.down = false; break;
+                        case 'Shift': this.inputs.run = false; break;
+                    }
+                });
+            }
+            
+            spawnCharacter(type) {
+                const config = type === 'mario' ? MARIO : LUIGI;
+                const character = new Character({
+                    ...config,
+                    x: 100,
+                    y: this.groundY
+                });
+                
+                this.characters.push(character);
+                this.activeCharacter = character;
+                
+                this.renderCharacter(character);
+                this.log(`✅ Spawned ${character.name} with ${character.jumpForce} jump force!`);
+            }
+            
+            spawnVehicle(type) {
+                const config = type === 'kart' ? KART : PIPE_CART;
+                const vehicle = new Vehicle({
+                    ...config,
+                    x: 50,
+                    y: this.groundY + 20
+                });
+                
+                this.vehicles.push(vehicle);
+                this.renderVehicle(vehicle);
+                this.log(`✅ Spawned ${vehicle.name}!`);
+            }
+            
+            spawnItem(type) {
+                const item = {
+                    ...ITEMS[type],
+                    x: Math.random() * 800 + 100,
+                    y: Math.random() * 150 + 50,
+                    id: Date.now()
+                };
+                
+                this.items.push(item);
+                this.renderItem(item);
+                this.log(`✅ Spawned ${item.emoji}!`);
+            }
+            
+            handleControl(action) {
+                switch(action) {
+                    case 'up':
+                    case 'jump':
+                        this.inputs.jump = true;
+                        setTimeout(() => this.inputs.jump = false, 100);
+                        break;
+                    case 'left':
+                        this.inputs.left = true;
+                        setTimeout(() => this.inputs.left = false, 200);
+                        break;
+                    case 'right':
+                        this.inputs.right = true;
+                        setTimeout(() => this.inputs.right = false, 200);
+                        break;
+                    case 'run':
+                        this.inputs.run = !this.inputs.run;
+                        break;
+                }
+            }
+            
+            toggleCharacter() {
+                if (this.characters.length > 1) {
+                    const idx = this.characters.indexOf(this.activeCharacter);
+                    this.activeCharacter = this.characters[(idx + 1) % this.characters.length];
+                    this.log(`🔄 Switched to ${this.activeCharacter.name}`);
+                }
+            }
+            
+            makeSpeak() {
+                if (this.activeCharacter) {
+                    const message = this.activeCharacter.speak();
+                    this.log(`💬 ${message}`);
+                }
+            }
+            
+            enterVehicle() {
+                this.log("🚗 Vehicle system coming soon!");
+            }
+            
+            renderCharacter(character) {
+                let elem = document.getElementById(`char-${character.name}`);
+                if (!elem) {
+                    elem = document.createElement('div');
+                    elem.id = `char-${character.name}`;
+                    elem.className = 'character';
+                    this.canvas.appendChild(elem);
+                }
+                
+                elem.innerHTML = character.getColoredSprite();
+                elem.style.left = character.x + 'px';
+                elem.style.bottom = (300 - character.y) + 'px';
+            }
+            
+            renderVehicle(vehicle) {
+                let elem = document.getElementById(`vehicle-${vehicle.name}`);
+                if (!elem) {
+                    elem = document.createElement('div');
+                    elem.id = `vehicle-${vehicle.name}`;
+                    elem.className = 'vehicle';
+                    this.canvas.appendChild(elem);
+                }
+                
+                elem.innerHTML = vehicle.getSprite();
+                elem.style.left = vehicle.x + 'px';
+                elem.style.bottom = (300 - vehicle.y) + 'px';
+            }
+            
+            renderItem(item) {
+                const elem = document.createElement('div');
+                elem.id = `item-${item.id}`;
+                elem.className = 'item';
+                elem.innerHTML = item.emoji;
+                elem.style.left = item.x + 'px';
+                elem.style.top = item.y + 'px';
+                this.canvas.appendChild(elem);
+            }
+            
+            updateStats() {
+                document.getElementById('coinCount').textContent = this.stats.coins;
+                document.getElementById('jumpCount').textContent = this.stats.jumps;
+                document.getElementById('powerUpCount').textContent = this.stats.powerUps;
+                document.getElementById('distance').textContent = Math.floor(this.stats.distance);
+            }
+            
+            checkCollisions() {
+                if (!this.activeCharacter) return;
+                
+                // Check item collisions
+                this.items = this.items.filter(item => {
+                    const dx = Math.abs(item.x - this.activeCharacter.x);
+                    const dy = Math.abs(item.y - this.activeCharacter.y);
+                    
+                    if (dx < 30 && dy < 30) {
+                        if (item.type === 'collectible') {
+                            this.stats.coins += item.value;
+                        } else if (item.type === 'power_up') {
+                            this.activeCharacter.powerUp(item.effect);
+                            this.stats.powerUps++;
+                        }
+                        
+                        const elem = document.getElementById(`item-${item.id}`);
+                        if (elem) elem.remove();
+                        
+                        this.log(`✨ Collected ${item.emoji}!`);
+                        return false;
+                    }
+                    return true;
+                });
+            }
+            
+            startGameLoop() {
+                this.running = true;
+                const loop = () => {
+                    if (!this.running) return;
+                    
+                    // Update active character
+                    if (this.activeCharacter) {
+                        const wasGrounded = this.activeCharacter.grounded;
+                        
+                        this.physics.update(this.activeCharacter, this.inputs, this.groundY);
+                        this.activeCharacter.updateState();
+                        this.activeCharacter.updateAnimation(1/30);
+                        this.renderCharacter(this.activeCharacter);
+                        
+                        // Track jumps
+                        if (wasGrounded && !this.activeCharacter.grounded) {
+                            this.stats.jumps++;
+                        }
+                        
+                        // Track distance
+                        this.stats.distance += Math.abs(this.activeCharacter.velocityX) * 0.01;
+                    }
+                    
+                    // Update vehicles
+                    this.vehicles.forEach(vehicle => {
+                        vehicle.updateAnimation();
+                        this.renderVehicle(vehicle);
+                    });
+                    
+                    // Check collisions
+                    this.checkCollisions();
+                    
+                    // Update stats
+                    this.updateStats();
+                    
+                    requestAnimationFrame(loop);
+                };
+                
+                loop();
+            }
+            
+            log(message) {
+                const line = document.createElement('div');
+                line.className = 'terminal-output';
+                line.innerHTML = message;
+                this.output.insertBefore(line, this.output.lastElementChild);
+                this.output.scrollTop = this.output.scrollHeight;
+            }
+        }
+        
+        // Initialize terminal
+        const terminal = new MRWTerminal();
+        
+        // Spawn Mario by default
+        terminal.spawnCharacter('mario');
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+{
+  "kris_token_system": {
+    "token_id": "🧱Kris🔑",
+    "description": "Master token formula system for Infinity Legend",
+    "version": "1.0.0",
+    
+    "token_tree": {
+      "root": "🧱Kris🔑",
+      "branches": [
+        {
+          "id": "powerful_orchestrator",
+          "token": "👑📶⚪",
+          "formula": "CROWN_INDEX + NUANCES + SEMANTIC_TOKEN",
+          "components": ["👑", "📶", "⚪"],
+          "meaning": "Powerful Orchestrator - High-level coordination with semantic precision",
+          "color": "🟦 BLUE",
+          "chain_position": "coordinator",
+          "outputs": ["orchestration_plans", "semantic_directives"]
+        },
+        {
+          "id": "facet_crown_growth",
+          "token": "💎👑🍄",
+          "formula": "FACET + CROWN_INDEX + GROWTH",
+          "components": ["💎", "👑", "🍄"],
+          "meaning": "Facet Crown Growth - Multi-perspective sovereign expansion",
+          "color": "🟨 YELLOW",
+          "chain_position": "expander",
+          "outputs": ["perspective_views", "growth_patterns"]
+        },
+        {
+          "id": "semantic_authority",
+          "token": "⚪👑🔗",
+          "formula": "SEMANTIC + CROWN_INDEX + CONNECTOR",
+          "components": ["⚪", "👑", "🔗"],
+          "meaning": "Semantic Authority - Meaningful connection governance",
+          "color": "🟨 YELLOW",
+          "chain_position": "authority",
+          "outputs": ["semantic_links", "governed_connections"]
+        },
+        {
+          "id": "memory_thread",
+          "token": "🗄️🧵📶",
+          "formula": "STORAGE + THREAD + NUANCES",
+          "components": ["🗄️", "🧵", "📶"],
+          "meaning": "Memory Thread - Persistent narrative tracking",
+          "color": "🟪 PURPLE",
+          "chain_position": "storage",
+          "outputs": ["persistent_threads", "narrative_chains"]
+        },
+        {
+          "id": "modulation_authority",
+          "token": "💎🎛️👑",
+          "formula": "FACET + SPINE + CROWN_INDEX",
+          "components": ["💎", "🎛️", "👑"],
+          "meaning": "Modulation Authority - Adaptive control governance",
+          "color": "🟦 BLUE",
+          "chain_position": "controller",
+          "outputs": ["modulation_signals", "adaptive_controls"]
+        },
+        {
+          "id": "value_audio",
+          "token": "⚪💰🎵",
+          "formula": "SEMANTIC + VALUE + AUDIO",
+          "components": ["⚪", "💰", "🎵"],
+          "meaning": "Value Audio - Semantic worth through sound",
+          "color": "🟥 RED",
+          "chain_position": "emitter",
+          "outputs": ["audio_values", "sound_semantics"]
+        },
+        {
+          "id": "pinned_control",
+          "token": "🖇️📍🕹️(📀)",
+          "formula": "LINK + PIN + CONTROLLER + DISK",
+          "components": ["🖇️", "📍", "🕹️", "📀"],
+          "meaning": "Pinned Control - Fixed-point disk management",
+          "color": "🟦 BLUE",
+          "chain_position": "controller",
+          "outputs": ["pinned_positions", "disk_controls"]
+        },
+        {
+          "id": "smart_weaver",
+          "token": "🪡🤓⭐",
+          "formula": "WEAVER + INTELLIGENCE + EXCELLENCE",
+          "components": ["🪡", "🤓", "⭐"],
+          "meaning": "Smart Weaver - Intelligent connection building",
+          "color": "🟨 YELLOW",
+          "chain_position": "integrator",
+          "outputs": ["intelligent_connections", "optimal_weaves"]
+        },
+        {
+          "id": "crown_magnet_memory",
+          "token": "👑🧲🪐",
+          "formula": "CROWN_INDEX + MAGNET + MEMORY_NODE",
+          "components": ["👑", "🧲", "🪐"],
+          "meaning": "Crown Magnet Memory - Sovereign persistent attraction",
+          "color": "🟪 PURPLE",
+          "chain_position": "storage",
+          "outputs": ["attracted_memories", "sovereign_persistence"],
+          "is_heartbeat": true,
+          "loop_formula": "🧲🪐🔁"
+        }
+      ]
+    },
+    
+    "composite_formulas": {
+      "kris_full_spectrum": "🧱Kris🔑 = Σ(all_token_branches)",
+      "crown_core": "👑📶⚪ + 💎👑🍄 + ⚪👑🔗 = Crown Authority System",
+      "memory_persistence": "🗄️🧵📶 + 👑🧲🪐 = Persistent Narrative Memory",
+      "intelligent_control": "💎🎛️👑 + 🖇️📍🕹️(📀) + 🪡🤓⭐ = Smart Adaptive Control"
+    },
+    
+    "usage_patterns": {
+      "orchestration": "Use 👑📶⚪ for high-level system coordination",
+      "growth": "Use 💎👑🍄 for expanding perspectives",
+      "linking": "Use ⚪👑🔗 for semantic connections",
+      "memory": "Use 🗄️🧵📶 and 👑🧲🪐 for persistent storage",
+      "control": "Use 💎🎛️👑 and 🖇️📍🕹️(📀) for system control",
+      "audio": "Use ⚪💰🎵 for sound-based semantics",
+      "weaving": "Use 🪡🤓⭐ for intelligent integration"
+    }
+  },
+  
+  "integration_points": {
+    "themes": "Token formulas apply across all 11 themes",
+    "terminals": "Control patterns govern MRW terminal interactions",
+    "labs": "Technical labs use appropriate control and memory tokens",
+    "discovery": "Semantic authority enables repo discovery"
+  }
+}
