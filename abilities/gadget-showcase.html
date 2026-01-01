@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 Gadget Showcase - infinity-brain-111</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      opacity: 0.95;
+    }
+
+    /* Search and filter */
+    .controls {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .search-box {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 15px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #fa709a;
+    }
+
+    .search-btn {
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .search-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: #fa709a;
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      color: white;
+      border-color: transparent;
+    }
+
+    /* Gadget grid */
+    .gadget-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .gadget-card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gadget-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #fa709a 0%, #fee140 100%);
+    }
+
+    .gadget-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+    }
+
+    .gadget-icon {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .gadget-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .gadget-category {
+      display: inline-block;
+      padding: 5px 12px;
+      background: rgba(250, 112, 154, 0.1);
+      border-radius: 15px;
+      font-size: 0.85rem;
+      color: #fa709a;
+      margin-bottom: 15px;
+    }
+
+    .gadget-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .gadget-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .activate-btn {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      color: white;
+    }
+
+    .activate-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .details-btn {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .details-btn:hover {
+      background: #e0e0e0;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .close-btn {
+      font-size: 2rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s ease;
+      background: none;
+      border: none;
+    }
+
+    .close-btn:hover {
+      color: #fa709a;
+    }
+
+    .modal-body {
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .feature-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+    }
+
+    .activation-status {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(56, 239, 125, 0.2);
+      color: #38ef7d;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .gadget-grid { grid-template-columns: 1fr; }
+      .modal-content { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎮 Gadget Showcase</h1>
+      <p class="subtitle">Interactive features and abilities for infinity-brain-111</p>
+    </header>
+
+    <!-- Search and Filter Controls -->
+    <div class="controls">
+      <div class="search-box">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput" 
+          placeholder="Search gadgets..."
+          onkeyup="filterGadgets()"
+        >
+        <button class="search-btn" onclick="filterGadgets()">🔍 Search</button>
+      </div>
+      
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="setCategory('all', event)">All</button>
+        <button class="filter-btn" onclick="setCategory('graphics', event)">🎨 Graphics</button>
+        <button class="filter-btn" onclick="setCategory('audio', event)">🔊 Audio</button>
+        <button class="filter-btn" onclick="setCategory('tools', event)">🛠️ Tools</button>
+        <button class="filter-btn" onclick="setCategory('social', event)">👥 Social</button>
+        <button class="filter-btn" onclick="setCategory('games', event)">🎮 Games</button>
+      </div>
+    </div>
+
+    <!-- Gadget Grid -->
+    <div class="gadget-grid" id="gadgetGrid">
+      <!-- Gadgets will be dynamically loaded -->
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="gadgetModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Gadget Details</h2>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Gadget data
+    const gadgets = [
+      {
+        id: 1,
+        name: 'Particle Storm',
+        icon: '✨',
+        category: 'graphics',
+        description: 'Create mesmerizing particle effects with customizable colors and behaviors',
+        features: ['Color customization', 'Physics simulation', 'Performance optimized', 'Mobile friendly'],
+        activated: false
+      },
+      {
+        id: 2,
+        name: 'Sound Wave',
+        icon: '🔊',
+        category: 'audio',
+        description: 'Visualize audio with beautiful waveforms and spectrum analyzers',
+        features: ['Real-time visualization', 'Multiple themes', 'Audio reactive', 'Export capabilities'],
+        activated: false
+      },
+      {
+        id: 3,
+        name: 'Color Picker Pro',
+        icon: '🎨',
+        category: 'tools',
+        description: 'Advanced color selection with palette generation and harmony suggestions',
+        features: ['Palette generation', 'Color harmony', 'Export formats', 'Accessibility check'],
+        activated: false
+      },
+      {
+        id: 4,
+        name: 'Friend Connector',
+        icon: '👥',
+        category: 'social',
+        description: 'Connect with friends, share content, and collaborate in real-time',
+        features: ['Real-time chat', 'File sharing', 'Video calls', 'Group management'],
+        activated: false
+      },
+      {
+        id: 5,
+        name: 'Mini Game Hub',
+        icon: '🎮',
+        category: 'games',
+        description: 'Collection of fun mini-games to play and share with friends',
+        features: ['Multiple games', 'Leaderboards', 'Achievements', 'Multiplayer support'],
+        activated: false
+      },
+      {
+        id: 6,
+        name: 'Gradient Generator',
+        icon: '🌈',
+        category: 'graphics',
+        description: 'Generate stunning gradients with advanced controls and presets',
+        features: ['Multiple gradient types', 'Color stops', 'CSS export', 'Save presets'],
+        activated: false
+      },
+      {
+        id: 7,
+        name: 'Code Beautifier',
+        icon: '💻',
+        category: 'tools',
+        description: 'Format and beautify code with syntax highlighting and theme support',
+        features: ['Multiple languages', 'Syntax highlighting', 'Theme support', 'Export options'],
+        activated: false
+      },
+      {
+        id: 8,
+        name: 'Animation Studio',
+        icon: '💫',
+        category: 'graphics',
+        description: 'Create smooth animations with timeline controls and keyframes',
+        features: ['Timeline editor', 'Keyframe animation', 'Easing functions', 'Export to video'],
+        activated: false
+      },
+      {
+        id: 9,
+        name: 'Mood Tracker',
+        icon: '😊',
+        category: 'social',
+        description: 'Track your mood and share updates with close friends',
+        features: ['Daily tracking', 'Mood analytics', 'Friend sharing', 'Insights'],
+        activated: false
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    // Initialize
+    function init() {
+      renderGadgets();
+    }
+
+    // Render gadgets
+    function renderGadgets() {
+      const grid = document.getElementById('gadgetGrid');
+      grid.innerHTML = '';
+
+      const filteredGadgets = currentCategory === 'all' 
+        ? gadgets 
+        : gadgets.filter(g => g.category === currentCategory);
+
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const searchFiltered = searchTerm 
+        ? filteredGadgets.filter(g => 
+            g.name.toLowerCase().includes(searchTerm) || 
+            g.description.toLowerCase().includes(searchTerm)
+          )
+        : filteredGadgets;
+
+      if (searchFiltered.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px; color: white; font-size: 1.2rem;">No gadgets found</p>';
+        return;
+      }
+
+      searchFiltered.forEach(gadget => {
+        const card = document.createElement('div');
+        card.className = 'gadget-card';
+        card.innerHTML = `
+          <div class="gadget-icon">${gadget.icon}</div>
+          <div class="gadget-name">${gadget.name}</div>
+          <div class="gadget-category">${gadget.category}</div>
+          <div class="gadget-description">${gadget.description}</div>
+          <div class="gadget-actions">
+            <button class="action-btn activate-btn" onclick="activateGadget(${gadget.id})">
+              ${gadget.activated ? '✓ Activated' : '⚡ Activate'}
+            </button>
+            <button class="action-btn details-btn" onclick="showDetails(${gadget.id})">
+              📋 Details
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Set category filter
+    function setCategory(category, event) {
+      currentCategory = category;
+      
+      // Update button states
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
+      
+      renderGadgets();
+    }
+
+    // Filter gadgets by search
+    function filterGadgets() {
+      renderGadgets();
+    }
+
+    // Activate gadget
+    function activateGadget(id) {
+      const gadget = gadgets.find(g => g.id === id);
+      if (gadget) {
+        gadget.activated = !gadget.activated;
+        
+        if (gadget.activated) {
+          showSuccessAnimation();
+          console.log(`${gadget.name} activated!`);
+        }
+        
+        renderGadgets();
+      }
+    }
+
+    // Show gadget details
+    function showDetails(id) {
+      const gadget = gadgets.find(g => g.id === id);
+      if (!gadget) return;
+
+      const modal = document.getElementById('gadgetModal');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+
+      title.innerHTML = `${gadget.icon} ${gadget.name}`;
+      
+      body.innerHTML = `
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">${gadget.description}</p>
+        
+        <h3 style="color: #333; margin-bottom: 15px;">✨ Features:</h3>
+        <ul class="feature-list">
+          ${gadget.features.map(f => `
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>${f}</span>
+            </li>
+          `).join('')}
+        </ul>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 10px;">
+          <h3 style="color: #333; margin-bottom: 15px;">📊 Category:</h3>
+          <div class="gadget-category">${gadget.category}</div>
+        </div>
+
+        <div class="activation-status">
+          ${gadget.activated ? '✓ Currently Active' : '○ Not Activated'}
+        </div>
+
+        <div style="margin-top: 30px; display: flex; gap: 10px;">
+          <button class="action-btn activate-btn" style="flex: 1;" onclick="activateGadget(${gadget.id}); closeModal();">
+            ${gadget.activated ? '✓ Deactivate' : '⚡ Activate Now'}
+          </button>
+        </div>
+      `;
+
+      modal.classList.add('active');
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('gadgetModal').classList.remove('active');
+    }
+
+    // Show success animation
+    function showSuccessAnimation() {
+      // Create confetti effect
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.top = '-10px';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+          confetti.style.borderRadius = '50%';
+          confetti.style.zIndex = '9999';
+          confetti.style.animation = 'confettiFall 3s linear forwards';
+          document.body.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 20);
+      }
+    }
+
+    // Close modal on outside click
+    document.getElementById('gadgetModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Initialize on load
+    window.addEventListener('load', init);
+  </script>
+
+  <style>
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</body>
+</html>

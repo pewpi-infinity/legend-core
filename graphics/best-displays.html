@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Best Graphics Display - infinity-brain-111</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #FFD700 0%, #9370DB 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Particle System */
+    .particle-system {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.7;
+      }
+      25% {
+        transform: translateY(-30px) translateX(20px) scale(1.2);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-10px) translateX(-20px) scale(0.8);
+        opacity: 0.5;
+      }
+      75% {
+        transform: translateY(-40px) translateX(10px) scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header with 3D effect */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      perspective: 1000px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.3),
+        0 0 40px rgba(255,255,255,0.5),
+        0 0 80px rgba(255,215,0,0.3);
+      animation: titleGlow 3s infinite alternate;
+      transform-style: preserve-3d;
+      margin-bottom: 15px;
+    }
+
+    @keyframes titleGlow {
+      from {
+        text-shadow: 
+          2px 2px 4px rgba(0,0,0,0.3),
+          0 0 40px rgba(255,255,255,0.5),
+          0 0 80px rgba(255,215,0,0.3);
+      }
+      to {
+        text-shadow: 
+          2px 2px 4px rgba(0,0,0,0.3),
+          0 0 60px rgba(255,255,255,0.8),
+          0 0 120px rgba(147,112,219,0.6);
+      }
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      opacity: 0.95;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 0.95; transform: translateY(0); }
+    }
+
+    /* Glassmorphism Cards */
+    .effects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .card-icon {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: iconFloat 3s infinite ease-in-out;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    .card-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .card-description {
+      text-align: center;
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* Canvas container for WebGL */
+    .canvas-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+    }
+
+    #graphicsCanvas {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 15px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      color: white;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Confetti animation */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: white;
+      animation: confettiFall 3s linear forwards;
+      z-index: 1000;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Sparkle effect */
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkleFade 1s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+
+    /* Accessibility controls */
+    .accessibility-panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .accessibility-controls {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .control-btn {
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .control-btn.active {
+      background: rgba(147, 112, 219, 0.6);
+      border: 2px solid white;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .subtitle { font-size: 1.2rem; }
+      .effects-grid { grid-template-columns: 1fr; }
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      text-align: center;
+      font-size: 2rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particle System -->
+  <div class="particle-system" id="particleSystem"></div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+  </button>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>✨ Best Graphics Display</h1>
+      <p class="subtitle">Pixie's Premium Visual Experience</p>
+    </header>
+
+    <!-- Effects Grid -->
+    <div class="effects-grid">
+      <div class="glass-card" onclick="activateEffect('particles', event)">
+        <div class="card-icon">✨</div>
+        <div class="card-title">Floating Particles</div>
+        <div class="card-description">
+          Beautiful animated particles that create a magical atmosphere
+        </div>
+      </div>
+
+      <div class="glass-card" onclick="activateEffect('gradients', event)">
+        <div class="card-icon">🌈</div>
+        <div class="card-title">Dynamic Gradients</div>
+        <div class="card-description">
+          Stunning color transitions that adapt to your actions
+        </div>
+      </div>
+
+      <div class="glass-card" onclick="activateEffect('3d', event)">
+        <div class="card-icon">🎲</div>
+        <div class="card-title">3D Transforms</div>
+        <div class="card-description">
+          CSS 3D transformations for depth and perspective
+        </div>
+      </div>
+
+      <div class="glass-card" onclick="activateEffect('glass', event)">
+        <div class="card-icon">🪟</div>
+        <div class="card-title">Glassmorphism</div>
+        <div class="card-description">
+          Frosted glass effects with blur and transparency
+        </div>
+      </div>
+
+      <div class="glass-card" onclick="activateEffect('animation', event)">
+        <div class="card-icon">💫</div>
+        <div class="card-title">Smooth Animations</div>
+        <div class="card-description">
+          Fluid motion with easing and micro-interactions
+        </div>
+      </div>
+
+      <div class="glass-card" onclick="activateEffect('confetti', event)">
+        <div class="card-icon">🎉</div>
+        <div class="card-title">Celebrations</div>
+        <div class="card-description">
+          Confetti, sparkles, and success animations
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas Container -->
+    <div class="canvas-container">
+      <h2 style="margin-bottom: 20px; font-size: 2rem;">🎨 Interactive Canvas</h2>
+      <canvas id="graphicsCanvas"></canvas>
+      <p style="margin-top: 15px; opacity: 0.8;">
+        Click and drag on the canvas to create visual effects
+      </p>
+    </div>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+      <h2 style="text-align: center; margin-bottom: 20px;">♿ Accessibility Controls</h2>
+      <div class="accessibility-controls">
+        <button class="control-btn" onclick="toggleMotion()" id="motionBtn">
+          🎬 Reduce Motion
+        </button>
+        <button class="control-btn" onclick="toggleContrast()" id="contrastBtn">
+          🔆 High Contrast
+        </button>
+        <button class="control-btn" onclick="toggleEffects()" id="effectsBtn">
+          ✨ Disable Effects
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Graphics engine
+    const GraphicsEngine = {
+      theme: 'dark',
+      particleCount: 50,
+      settings: {
+        motion: true,
+        contrast: false,
+        effects: true
+      },
+
+      init: function() {
+        this.createParticles();
+        this.initCanvas();
+        console.log('✨ Graphics engine initialized');
+      },
+
+      createParticles: function() {
+        const system = document.getElementById('particleSystem');
+        system.innerHTML = '';
+
+        for (let i = 0; i < this.particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          
+          const size = Math.random() * 15 + 5;
+          particle.style.width = size + 'px';
+          particle.style.height = size + 'px';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.animationDelay = Math.random() * 15 + 's';
+          particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+          
+          system.appendChild(particle);
+        }
+      },
+
+      initCanvas: function() {
+        const canvas = document.getElementById('graphicsCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let hue = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+          isDrawing = true;
+          [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+          if (!isDrawing) return;
+          
+          ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+          ctx.lineWidth = 5;
+          ctx.lineCap = 'round';
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = `hsl(${hue}, 100%, 50%)`;
+          
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(e.offsetX, e.offsetY);
+          ctx.stroke();
+          
+          [lastX, lastY] = [e.offsetX, e.offsetY];
+          hue = (hue + 1) % 360;
+        });
+
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false);
+
+        // Draw initial gradient
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, 'rgba(255, 215, 0, 0.2)');
+        gradient.addColorStop(1, 'rgba(147, 112, 219, 0.2)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      },
+
+      createConfetti: function() {
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-10px';
+            confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 3000);
+          }, i * 30);
+        }
+      },
+
+      createSparkles: function(x, y) {
+        for (let i = 0; i < 10; i++) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          sparkle.style.left = x + Math.random() * 40 - 20 + 'px';
+          sparkle.style.top = y + Math.random() * 40 - 20 + 'px';
+          document.body.appendChild(sparkle);
+
+          setTimeout(() => sparkle.remove(), 1000);
+        }
+      }
+    };
+
+    // Event handlers
+    function toggleTheme() {
+      GraphicsEngine.theme = GraphicsEngine.theme === 'dark' ? 'light' : 'dark';
+      
+      if (GraphicsEngine.theme === 'light') {
+        document.body.style.background = 'linear-gradient(135deg, #ffeaa7 0%, #dfe6e9 100%)';
+        document.body.style.color = '#333';
+        document.getElementById('themeIcon').textContent = '☀️';
+        document.getElementById('themeText').textContent = 'Light';
+      } else {
+        document.body.style.background = 'linear-gradient(135deg, #FFD700 0%, #9370DB 100%)';
+        document.body.style.color = 'white';
+        document.getElementById('themeIcon').textContent = '🌙';
+        document.getElementById('themeText').textContent = 'Dark';
+      }
+    }
+
+    function activateEffect(effect, event) {
+      console.log('Activating effect:', effect);
+      
+      if (effect === 'confetti') {
+        GraphicsEngine.createConfetti();
+      } else if (effect === 'particles') {
+        GraphicsEngine.createParticles();
+      }
+      
+      // Create sparkles at button location
+      if (event && event.clientX !== undefined) {
+        GraphicsEngine.createSparkles(event.clientX, event.clientY);
+      }
+    }
+
+    function toggleMotion() {
+      GraphicsEngine.settings.motion = !GraphicsEngine.settings.motion;
+      const btn = document.getElementById('motionBtn');
+      btn.classList.toggle('active');
+      
+      if (!GraphicsEngine.settings.motion) {
+        document.querySelectorAll('.particle, .card-icon').forEach(el => {
+          el.style.animation = 'none';
+        });
+      } else {
+        GraphicsEngine.init();
+      }
+    }
+
+    function toggleContrast() {
+      GraphicsEngine.settings.contrast = !GraphicsEngine.settings.contrast;
+      const btn = document.getElementById('contrastBtn');
+      btn.classList.toggle('active');
+      
+      if (GraphicsEngine.settings.contrast) {
+        document.body.style.filter = 'contrast(1.5)';
+      } else {
+        document.body.style.filter = 'none';
+      }
+    }
+
+    function toggleEffects() {
+      GraphicsEngine.settings.effects = !GraphicsEngine.settings.effects;
+      const btn = document.getElementById('effectsBtn');
+      btn.classList.toggle('active');
+      
+      const particles = document.getElementById('particleSystem');
+      particles.style.display = GraphicsEngine.settings.effects ? 'block' : 'none';
+    }
+
+    // Initialize on load
+    window.addEventListener('load', () => {
+      GraphicsEngine.init();
+    });
+  </script>
+</body>
+</html>

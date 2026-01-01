@@ -1,0 +1,89 @@
+<!-- ∞ INFINITY LEGEND INJECTION TEMPLATE -->
+<!-- Authority: pewpi-infinity/legend-core -->
+
+<div class="infinity-legend-system">
+  <style>
+    .infinity-legend-system {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .legend-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .legend-info {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .legend-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      margin: 5px;
+      font-size: 0.9rem;
+    }
+  </style>
+
+  <div class="legend-header">
+    ∞ Infinity Legend System
+  </div>
+
+  <div class="legend-info">
+    <p><strong>Authority:</strong> pewpi-infinity/legend-core</p>
+    <p><strong>Ecosystem Version:</strong> 1.0.0</p>
+    <p><strong>Status:</strong> <span class="legend-badge">🟢 Active</span></p>
+    <p style="margin-top: 10px;">
+      This page is part of the Infinity ecosystem, managed by the Legend Core system.
+    </p>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Infinity Legend System Integration
+  window.INFINITY_LEGEND = {
+    version: '1.0.0',
+    authority: 'pewpi-infinity/legend-core',
+    injected: true,
+    timestamp: new Date().toISOString(),
+    
+    // Connect to legend core
+    connect: function() {
+      console.log('∞ Connected to Infinity Legend System');
+      return true;
+    },
+    
+    // Get system status
+    getStatus: function() {
+      return {
+        active: true,
+        connected: true,
+        version: this.version
+      };
+    }
+  };
+  
+  // Auto-connect on load
+  if (document.readyState === 'complete') {
+    window.INFINITY_LEGEND.connect();
+  } else {
+    window.addEventListener('load', function() {
+      window.INFINITY_LEGEND.connect();
+    });
+  }
+})();
+</script>
